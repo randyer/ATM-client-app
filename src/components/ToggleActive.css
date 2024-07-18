@@ -1,0 +1,19 @@
+.toggle-button {
+  padding: 10px 20px;
+  background-color: #ddd;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-button.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.toggle-button.archived {
+  background-color: #b00000;
+  color: white;
+}

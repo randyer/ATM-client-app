@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import './ClientInfo.css';
+import Toggle from './components/ToggleActive';
 
 function ClientInfo({ clients, setClients }) {
   const { id } = useParams();
@@ -13,6 +14,10 @@ function ClientInfo({ clients, setClients }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditableClient(prevState => ({ ...prevState, [name]: value }));
+  };
+
+  const handleToggle = (newActiveValue) => {
+    setEditableClient(prevState => ({ ...prevState, active: newActiveValue }));
   };
 
   const handleSave = () => {
@@ -193,6 +198,7 @@ function ClientInfo({ clients, setClients }) {
       <header className="client-info-header">
         <Link to="/" className="back-button">←</Link>
         <h1>Profile</h1>
+        <Toggle val={editableClient.active} onToggle={handleToggle}></Toggle>
         <button onClick={handleSave} className="save-button">Save</button>
       </header>
       <div className="client-profile">
@@ -201,6 +207,7 @@ function ClientInfo({ clients, setClients }) {
         </div>
         <h2>{editableClient.firstName} {editableClient.lastName}</h2>
       </div>
+        
       <div className="tab-bar">
         <button 
           className={`tab-button ${activeTab === 'profile' ? 'active' : ''}`} 

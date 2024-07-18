@@ -37,7 +37,7 @@ function App() {
       pastSymptoms: 'Shoulder pain',
       pastInjuries: 'Sprained ankle',
       pastSurgeries: 'Knee surgery',
-      active: true
+      active: false
     },
     // Add more clients as needed
   ]);
