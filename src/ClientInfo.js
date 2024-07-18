@@ -19,11 +19,10 @@ function ClientInfo({ clients, setClients }) {
   const handleToggleActive = (newActiveValue) => {
     setEditableClient(prevState => ({ ...prevState, active: newActiveValue }));
   };
-  
+
   const handleToggleFavorite = (newFavoriteValue) => {
     setEditableClient(prevState => ({ ...prevState, favorite: newFavoriteValue }));
   };
-  
 
   const handleSave = () => {
     setClients(prevClients => 
@@ -198,6 +197,20 @@ function ClientInfo({ clients, setClients }) {
     </div>
   );
 
+  const renderNotesTab = () => (
+    <div className="general-notes">
+      <p>
+        <strong>General Notes:</strong>
+        <textarea 
+          name="generalNotes" 
+          value={editableClient.generalNotes || ''} 
+          onChange={handleChange}
+          style={{ width: '100%', height: '200px' }}
+        ></textarea>
+      </p>
+    </div>
+  );
+
   return (
     <div className="client-info-page">
       <header className="client-info-header">
@@ -205,7 +218,6 @@ function ClientInfo({ clients, setClients }) {
         <h1>Profile</h1>
         <Toggle val={editableClient.active} onToggle={handleToggleActive} isTrue={'Active'} isFalse={'Archived'}></Toggle>
         <Toggle val={editableClient.favorite} onToggle={handleToggleFavorite} isTrue={'fav'} isFalse={'notfav'}></Toggle>
-
         <button onClick={handleSave} className="save-button">Save</button>
       </header>
       <div className="client-profile">
@@ -226,7 +238,13 @@ function ClientInfo({ clients, setClients }) {
           className={`tab-button ${activeTab === 'soap' ? 'active' : ''}`} 
           onClick={() => setActiveTab('soap')}
         >
-          SOAP Notes
+          SOAP
+        </button>
+        <button 
+          className={`tab-button ${activeTab === 'notes' ? 'active' : ''}`} 
+          onClick={() => setActiveTab('notes')}
+        >
+          General
         </button>
         <button 
           className={`tab-button ${activeTab === 'appointments' ? 'active' : ''}`} 
@@ -237,6 +255,7 @@ function ClientInfo({ clients, setClients }) {
       </div>
       {activeTab === 'profile' && renderProfileTab()}
       {activeTab === 'soap' && renderSoapTab()}
+      {activeTab === 'notes' && renderNotesTab()}
       {activeTab === 'appointments' && renderAppointmentsTab()}
     </div>
   );
