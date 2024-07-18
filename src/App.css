@@ -1,0 +1,107 @@
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.App-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #282c34;
+  color: white;
+}
+
+.add-client-button {
+  background-color: #61dafb;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  line-height: 1rem;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 1rem;
+}
+
+.tab.active {
+  border-bottom: 2px solid #61dafb;
+}
+
+.search-bar {
+  padding: 0.5rem;
+  width: 80%;
+  max-width: 500px;
+  margin: 1rem 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.client-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.client-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.client-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.client-link:hover {
+  background-color: #f1f1f1;
+}
+
+.client-initials {
+  width: 3rem;
+  height: 3rem;
+  background-color: #61dafb;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+.client-info {
+  text-align: left;
+}
+
+.client-name {
+  font-size: 1.2rem;
+}
+
+.client-phone,
+.client-email {
+  color: #666;
+}
