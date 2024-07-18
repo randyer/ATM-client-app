@@ -20,7 +20,8 @@ function App() {
       pastSymptoms: 'Back pain',
       pastInjuries: 'Broken leg',
       pastSurgeries: 'Appendectomy',
-      active: true
+      active: true,
+      favorite: true
     },
     {
       id: 2,
@@ -37,7 +38,9 @@ function App() {
       pastSymptoms: 'Shoulder pain',
       pastInjuries: 'Sprained ankle',
       pastSurgeries: 'Knee surgery',
-      active: false
+      active: false,
+      favorite: false
+
     },
     // Add more clients as needed
   ]);
@@ -77,7 +80,8 @@ function App() {
           pastSymptoms: newPastSymptoms,
           pastInjuries: newPastInjuries,
           pastSurgeries: newPastSurgeries,
-          active: true
+          active: true,
+          favorite: false
         }
       ]);
     }
@@ -125,7 +129,7 @@ function App() {
                       <Link to={`/client/${client.id}`} className="client-link">
                         <div className="client-initials">{getInitials(client.firstName, client.lastName)}</div>
                         <div className="client-info">
-                          <div className="client-name">{client.firstName} {client.lastName}</div>
+                          <div className="client-name">{client.firstName} {client.lastName} {client.favorite && '⭐'}</div>
                           <div className="client-phone">{client.phone}</div>
                           {client.email && <div className="client-email">{client.email}</div>}
                         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import './ClientInfo.css';
-import Toggle from './components/ToggleActive';
+import Toggle from './components/Toggle';
 
 function ClientInfo({ clients, setClients }) {
   const { id } = useParams();
@@ -16,9 +16,14 @@ function ClientInfo({ clients, setClients }) {
     setEditableClient(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleToggle = (newActiveValue) => {
+  const handleToggleActive = (newActiveValue) => {
     setEditableClient(prevState => ({ ...prevState, active: newActiveValue }));
   };
+  
+  const handleToggleFavorite = (newFavoriteValue) => {
+    setEditableClient(prevState => ({ ...prevState, favorite: newFavoriteValue }));
+  };
+  
 
   const handleSave = () => {
     setClients(prevClients => 
@@ -198,7 +203,9 @@ function ClientInfo({ clients, setClients }) {
       <header className="client-info-header">
         <Link to="/" className="back-button">←</Link>
         <h1>Profile</h1>
-        <Toggle val={editableClient.active} onToggle={handleToggle}></Toggle>
+        <Toggle val={editableClient.active} onToggle={handleToggleActive} isTrue={'Active'} isFalse={'Archived'}></Toggle>
+        <Toggle val={editableClient.favorite} onToggle={handleToggleFavorite} isTrue={'fav'} isFalse={'notfav'}></Toggle>
+
         <button onClick={handleSave} className="save-button">Save</button>
       </header>
       <div className="client-profile">
