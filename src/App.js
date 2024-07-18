@@ -93,7 +93,7 @@ function App() {
   );
 
   return (
-    <Router>
+    <Router basename='/ATM-client-app'>
       <div className="App">
         <Routes>
           <Route

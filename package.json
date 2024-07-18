@@ -1,7 +1,7 @@
 {
   "name": "atm-client-manager",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "homepage": "https://randyer.github.io/ATM-client-app",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
