@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './ToggleActive.css'
+import './Toggle.css'
 
-function ToggleActive({ val, onToggle }) {
+function ToggleActive({ val, onToggle, isTrue, isFalse }) {
   const [isToggled, setIsToggled] = useState(val);
 
   useEffect(() => {
@@ -14,8 +14,8 @@ function ToggleActive({ val, onToggle }) {
   };
 
   return (
-    <button onClick={handleChange} className={`toggle-button ${isToggled ? 'active' : 'archived'}`}>
-      {isToggled ? 'Active' : 'Archived'}
+    <button onClick={handleChange} className={`toggle-button ${isToggled ? 'true' : 'false'}`}>
+      {isToggled ? isTrue : isFalse}
     </button>
   );
 }
