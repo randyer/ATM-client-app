@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ATM-client-app/static/css/main.d45cf85d.css",
-    "main.js": "/ATM-client-app/static/js/main.9f4c96d1.js",
+    "main.css": "/ATM-client-app/static/css/main.ee28b4ff.css",
+    "main.js": "/ATM-client-app/static/js/main.73980dd0.js",
     "static/js/453.113d9faa.chunk.js": "/ATM-client-app/static/js/453.113d9faa.chunk.js",
     "index.html": "/ATM-client-app/index.html",
-    "main.d45cf85d.css.map": "/ATM-client-app/static/css/main.d45cf85d.css.map",
-    "main.9f4c96d1.js.map": "/ATM-client-app/static/js/main.9f4c96d1.js.map",
+    "main.ee28b4ff.css.map": "/ATM-client-app/static/css/main.ee28b4ff.css.map",
+    "main.73980dd0.js.map": "/ATM-client-app/static/js/main.73980dd0.js.map",
     "453.113d9faa.chunk.js.map": "/ATM-client-app/static/js/453.113d9faa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d45cf85d.css",
-    "static/js/main.9f4c96d1.js"
+    "static/css/main.ee28b4ff.css",
+    "static/js/main.73980dd0.js"
   ]
 }
