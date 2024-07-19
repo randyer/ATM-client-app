@@ -21,7 +21,8 @@ function App() {
       pastInjuries: 'Broken leg',
       pastSurgeries: 'Appendectomy',
       active: true,
-      favorite: true
+      favorite: true,
+      needsReview: false
     },
     {
       id: 2,
@@ -39,11 +40,12 @@ function App() {
       pastInjuries: 'Sprained ankle',
       pastSurgeries: 'Knee surgery',
       active: false,
-      favorite: false
-
+      favorite: false,
+      needsReview: false
     },
     // Add more clients as needed
   ]);
+
 
   const [search, setSearch] = useState('');
   const [activeTab, setActiveTab] = useState('active');
@@ -129,7 +131,7 @@ function App() {
                       <Link to={`/client/${client.id}`} className="client-link">
                         <div className="client-initials">{getInitials(client.firstName, client.lastName)}</div>
                         <div className="client-info">
-                          <div className="client-name">{client.firstName} {client.lastName} {client.favorite && '⭐'}</div>
+                          <div className="client-name">{client.firstName} {client.lastName} {client.favorite && '⭐'}{client.needsReview && '🔍'}</div>
                           <div className="client-phone">{client.phone}</div>
                           {client.email && <div className="client-email">{client.email}</div>}
                         </div>

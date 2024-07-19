@@ -31,6 +31,10 @@ function ClientInfo({ clients, setClients }) {
     navigate('/');
   };
 
+  const handleToggleNeedsReview = (newNeedsReviewValue) => {
+    setEditableClient(prevState => ({ ...prevState, needsReview: newNeedsReviewValue }));
+  };
+
   if (!client) {
     return <div>Client not found</div>;
   }
@@ -218,6 +222,7 @@ function ClientInfo({ clients, setClients }) {
         <h1>Profile</h1>
         <Toggle val={editableClient.active} onToggle={handleToggleActive} isTrue={'Active'} isFalse={'Archived'}></Toggle>
         <Toggle val={editableClient.favorite} onToggle={handleToggleFavorite} isTrue={'fav'} isFalse={'notfav'}></Toggle>
+        <Toggle val={editableClient.needsReview} onToggle={handleToggleNeedsReview} isTrue={'review'} isFalse={'notreview'}></Toggle>
         <button onClick={handleSave} className="save-button">Save</button>
       </header>
       <div className="client-profile">
