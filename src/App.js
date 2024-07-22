@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import ClientInfo from './ClientInfo';
-import './App.css';
+import './css/App.css';
+import './css/variables.css';
+
+// svgs
+import { ReactComponent as NeedsReview } from './icons/important.svg';
+import { ReactComponent as AddButton } from './icons/add.svg';
+import { ReactComponent as Star } from './icons/star.svg';
+import { ReactComponent as StarFill } from './icons/startFill.svg';
 
 function App() {
   const [clients, setClients] = useState([
@@ -108,7 +115,7 @@ function App() {
               <>
                 <header className="App-header">
                   <h1>Clients</h1>
-                  <button onClick={addClient} className="add-client-button">+</button>
+                  <AddButton onClick={addClient} className='svg-icon'></AddButton>
                 </header>
                 <div className="tabs">
                   <button className={`tab ${activeTab === 'active' ? 'active' : ''}`} onClick={() => setActiveTab('active')}>
@@ -129,12 +136,17 @@ function App() {
                   {filteredClients.map(client => (
                     <li key={client.id} className="client-item">
                       <Link to={`/client/${client.id}`} className="client-link">
+                      <div className='client-info-container'>
                         <div className="client-initials">{getInitials(client.firstName, client.lastName)}</div>
                         <div className="client-info">
-                          <div className="client-name">{client.firstName} {client.lastName} {client.favorite && '⭐'}{client.needsReview && '🔍'}</div>
+                          <div className="client-name">{client.firstName} {client.lastName} </div>
                           <div className="client-phone">{client.phone}</div>
                           {client.email && <div className="client-email">{client.email}</div>}
                         </div>
+                      </div>
+
+                        {client.needsReview && <NeedsReview className='svg-icon'></NeedsReview>}
+                        {client.favorite && <Star className='svg-icon'></Star>}
                       </Link>
                     </li>
                   ))}

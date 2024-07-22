@@ -1,0 +1,8 @@
+:root {
+  --purple: #9d71b3;
+  --svg-color: #9d71b3
+}
+
+.svg-icon {
+  fill: var(--svg-color);
+}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Toggle.css'
+import './ToggleButton.css'
 
 function ToggleActive({ val, onToggle, isTrue, isFalse }) {
   const [isToggled, setIsToggled] = useState(val);
