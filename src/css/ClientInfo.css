@@ -1,10 +1,13 @@
-
-
-/* App.css */
+/* ClientInfo.css */
 
 .client-info-page {
-  padding: 1rem;
+  /* display:flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* padding: 1rem; */
   font-family: Arial, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 .client-info-header {
@@ -12,19 +15,19 @@
   align-items: center;
   justify-content: space-between;
   background-color: var(--purple);
-  color: white;
+  color: var(--foreground);
   padding: 1rem;
   border-radius: 5px 5px 0 0;
 }
 
 .back-button {
   text-decoration: none;
-  color: white;
+  color: var(--foreground);
   font-size: 1.5rem;
 }
 
 .save-button {
-  background-color: white;
+  background-color: var(--foreground);
   border: none;
   color: var(--purple);
   padding: 0.5rem 1rem;
@@ -39,14 +42,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -2rem;
+  margin-top: -1rem;
   margin-bottom: 1rem;
 }
 
 .client-avatar {
   width: 4rem;
   height: 4rem;
-  background-color: #ddd;
+  background-color: var(--border);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -56,11 +59,18 @@
   margin-bottom: 0.5rem;
 }
 
+.toggle-container {
+  display: flex;
+}
+
 .tab-bar {
   display: flex;
+  justify-self: center;
   justify-content: space-around;
-  background-color: #f1f1f1;
+  /* max-width: 20rem; */
+  background-color: var(--hover-bg);
   padding: 0.5rem;
+  margin: 1rem;
   margin-bottom: 1rem;
   border-radius: 5px;
 }
@@ -71,36 +81,52 @@
   padding: 0.5rem 1rem;
   font-size: 1rem;
   cursor: pointer;
+  color: var(--foreground);
+}
+
+.tab-button svg {
+  fill: var(--foreground);
 }
 
 .tab-button.active {
   background-color: var(--purple);
-  color: white;
+  color: var(--foreground);
   border-radius: 5px;
 }
 
-.client-details, .soap-notes, .appointments {
-  background: white;
+.client-details,
+.soap-notes,
+.appointments {
+  background: var(--input-bg);
   padding: 1rem;
   border-radius: 5px;
 }
 
-.client-details p, .soap-notes p, .appointments ul {
+.client-details p,
+.soap-notes p,
+.appointments ul {
   margin: 0.5rem 0;
-  justify-self: start;
 }
 
-.client-details strong, .soap-notes strong {
-  /* width: 150px; */
+.client-details strong,
+.soap-notes strong {
   display: inline-block;
 }
 
-.client-details input, .soap-notes textarea {
+.client-details input,
+.soap-notes textarea,
+.general-notes textarea {
   width: 95%;
   padding: 0.5rem;
   font-size: 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   border-radius: 5px;
+  background-color: var(--input-bg);
+  color: var(--foreground);
+}
+
+.general-notes{
+  width: 95%;
 }
 
 .soap-notes textarea {
@@ -114,5 +140,5 @@
 
 .appointments li {
   padding: 0.5rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--border);
 }
