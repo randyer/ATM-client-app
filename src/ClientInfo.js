@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import './ClientInfo.css';
-import Toggle from './components/Toggle';
+import './css/ClientInfo.css';
+import './css/variables.css';
+import Toggle from './components/ToggleButton';
 
 function ClientInfo({ clients, setClients }) {
   const { id } = useParams();
@@ -24,17 +25,17 @@ function ClientInfo({ clients, setClients }) {
     setEditableClient(prevState => ({ ...prevState, favorite: newFavoriteValue }));
   };
 
+  const handleToggleNeedsReview = (newNeedsReviewValue) => {
+    setEditableClient(prevState => ({ ...prevState, needsReview: newNeedsReviewValue }));
+  };
+
   const handleSave = () => {
     setClients(prevClients => 
       prevClients.map(c => (c.id === editableClient.id ? editableClient : c))
     );
     navigate('/');
   };
-
-  const handleToggleNeedsReview = (newNeedsReviewValue) => {
-    setEditableClient(prevState => ({ ...prevState, needsReview: newNeedsReviewValue }));
-  };
-
+  
   if (!client) {
     return <div>Client not found</div>;
   }

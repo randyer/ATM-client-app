@@ -13,7 +13,7 @@
 }
 
 .add-client-button {
-  background-color: #61dafb;
+  background-color: var(--purple);
   border: none;
   color: white;
   padding: 0.5rem 1rem;
@@ -44,7 +44,7 @@
 }
 
 .tab.active {
-  border-bottom: 2px solid #61dafb;
+  border-bottom: 2px solid var(--purple);
 }
 
 .search-bar {
@@ -74,6 +74,7 @@
   display: flex;
   align-items: center;
   width: 100%;
+  justify-content: space-between;
 }
 
 .client-link:hover {
@@ -83,7 +84,7 @@
 .client-initials {
   width: 3rem;
   height: 3rem;
-  background-color: #61dafb;
+  background-color: var(--purple);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -91,6 +92,11 @@
   align-items: center;
   font-size: 1.5rem;
   margin-right: 1rem;
+}
+
+.client-info-container{
+  display: flex;
+  
 }
 
 .client-info {
