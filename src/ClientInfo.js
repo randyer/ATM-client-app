@@ -4,6 +4,23 @@ import './css/ClientInfo.css';
 import './css/variables.css';
 import Toggle from './components/ToggleButton';
 
+// icons
+import {ReactComponent as Archived} from './icons/inventoryFill.svg'
+import {ReactComponent as Active} from './icons/inventory.svg'
+import { ReactComponent as Star } from './icons/star.svg';
+import { ReactComponent as StarFill } from './icons/startFill.svg';
+import { ReactComponent as NoReview } from './icons/important.svg';
+import { ReactComponent as NeedsReview } from './icons/importantFill.svg';
+import { ReactComponent as Back } from './icons/backArrow.svg';
+import { ReactComponent as Profile } from './icons/person.svg';
+import { ReactComponent as ProfileFill } from './icons/personFill.svg';
+import { ReactComponent as Soap } from './icons/cognition.svg';
+import { ReactComponent as SoapFill } from './icons/cognitionFill.svg';
+import { ReactComponent as Notes } from './icons/note.svg';
+import { ReactComponent as NotesFill } from './icons/noteFill.svg';
+import { ReactComponent as Appointment } from './icons/calendar.svg';
+import { ReactComponent as AppointmentFill } from './icons/calendarFill.svg';
+
 function ClientInfo({ clients, setClients }) {
   const { id } = useParams();
   const client = clients.find(client => client.id === parseInt(id));
@@ -219,11 +236,13 @@ function ClientInfo({ clients, setClients }) {
   return (
     <div className="client-info-page">
       <header className="client-info-header">
-        <Link to="/" className="back-button">←</Link>
-        <h1>Profile</h1>
-        <Toggle val={editableClient.active} onToggle={handleToggleActive} isTrue={'Active'} isFalse={'Archived'}></Toggle>
-        <Toggle val={editableClient.favorite} onToggle={handleToggleFavorite} isTrue={'fav'} isFalse={'notfav'}></Toggle>
-        <Toggle val={editableClient.needsReview} onToggle={handleToggleNeedsReview} isTrue={'review'} isFalse={'notreview'}></Toggle>
+        <Link to="/" className="back-button"><Back></Back></Link>
+        {/* <h1>Profile</h1> */}
+        <div className='toggle-container'>
+          <Toggle val={editableClient.favorite} onToggle={handleToggleFavorite} isTrue={<StarFill></StarFill>} isFalse={<Star></Star>}></Toggle>
+          <Toggle val={editableClient.needsReview} onToggle={handleToggleNeedsReview} isTrue={<NeedsReview></NeedsReview>} isFalse={<NoReview></NoReview>}></Toggle>
+          <Toggle val={editableClient.active} onToggle={handleToggleActive} isTrue={<Active></Active>} isFalse={<Archived></Archived>}></Toggle>
+        </div>
         <button onClick={handleSave} className="save-button">Save</button>
       </header>
       <div className="client-profile">
@@ -234,30 +253,30 @@ function ClientInfo({ clients, setClients }) {
       </div>
         
       <div className="tab-bar">
-        <button 
-          className={`tab-button ${activeTab === 'profile' ? 'active' : ''}`} 
+      <div
+        className={`tab-button ${activeTab === 'profile' ? 'active' : ''}`} 
           onClick={() => setActiveTab('profile')}
         >
-          Profile
-        </button>
-        <button 
+          {activeTab === 'profile' ? <ProfileFill /> : <Profile />}
+        </div>
+        <div 
           className={`tab-button ${activeTab === 'soap' ? 'active' : ''}`} 
           onClick={() => setActiveTab('soap')}
         >
-          SOAP
-        </button>
-        <button 
+          {activeTab === 'soap' ? <SoapFill /> : <Soap />}
+        </div>
+        <div 
           className={`tab-button ${activeTab === 'notes' ? 'active' : ''}`} 
           onClick={() => setActiveTab('notes')}
         >
-          General
-        </button>
-        <button 
+          {activeTab === 'notes' ? <NotesFill /> : <Notes />}
+        </div>
+        <div 
           className={`tab-button ${activeTab === 'appointments' ? 'active' : ''}`} 
           onClick={() => setActiveTab('appointments')}
         >
-          Appointments
-        </button>
+          {activeTab === 'appointments' ? <AppointmentFill /> : <Appointment />}
+        </div>
       </div>
       {activeTab === 'profile' && renderProfileTab()}
       {activeTab === 'soap' && renderSoapTab()}

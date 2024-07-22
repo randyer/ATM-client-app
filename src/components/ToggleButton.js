@@ -10,7 +10,9 @@ function ToggleActive({ val, onToggle, isTrue, isFalse }) {
 
   const handleChange = () => {
     setIsToggled(!isToggled);
-    onToggle(!isToggled); // Call the callback function with the new value
+    if (typeof onToggle === 'function') {
+      onToggle(!isToggled); // Call the callback function with the new value
+    }
   };
 
   return (
