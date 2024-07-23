@@ -20,6 +20,8 @@ import { ReactComponent as Notes } from './icons/note.svg';
 import { ReactComponent as NotesFill } from './icons/noteFill.svg';
 import { ReactComponent as Appointment } from './icons/calendar.svg';
 import { ReactComponent as AppointmentFill } from './icons/calendarFill.svg';
+import { ReactComponent as Waitlist } from './icons/hourglass.svg';
+import { ReactComponent as WaitlistFill } from './icons/hourglassFill.svg';
 
 function ClientInfo({ clients, setClients }) {
   const { id } = useParams();
@@ -36,6 +38,9 @@ function ClientInfo({ clients, setClients }) {
 
   const handleToggleActive = (newActiveValue) => {
     setEditableClient(prevState => ({ ...prevState, active: newActiveValue }));
+    if(editableClient.waitlisted === true && newActiveValue === false){
+      setEditableClient(prevState => ({ ...prevState, waitlisted: false }));
+    }
   };
 
   const handleToggleFavorite = (newFavoriteValue) => {
@@ -44,6 +49,13 @@ function ClientInfo({ clients, setClients }) {
 
   const handleToggleNeedsReview = (newNeedsReviewValue) => {
     setEditableClient(prevState => ({ ...prevState, needsReview: newNeedsReviewValue }));
+  };
+
+  const handleToggleWaitlist = (newWaitlistValue) => {
+    setEditableClient(prevState => ({ ...prevState, waitlisted: newWaitlistValue }));
+    if(editableClient.active === false && newWaitlistValue === true){
+      setEditableClient(prevState => ({ ...prevState, active: true }));
+    }
   };
 
   const handleSave = () => {
@@ -239,9 +251,11 @@ function ClientInfo({ clients, setClients }) {
         <Link to="/" className="back-button"><Back></Back></Link>
         {/* <h1>Profile</h1> */}
         <div className='toggle-container'>
+        {/* <div className="tab-bar"> */}
           <Toggle val={editableClient.favorite} onToggle={handleToggleFavorite} isTrue={<StarFill></StarFill>} isFalse={<Star></Star>}></Toggle>
           <Toggle val={editableClient.needsReview} onToggle={handleToggleNeedsReview} isTrue={<NeedsReview></NeedsReview>} isFalse={<NoReview></NoReview>}></Toggle>
           <Toggle val={editableClient.active} onToggle={handleToggleActive} isTrue={<Active></Active>} isFalse={<Archived></Archived>}></Toggle>
+          <Toggle val={editableClient.waitlisted} onToggle={handleToggleWaitlist} isTrue={<WaitlistFill></WaitlistFill>} isFalse={<Waitlist></Waitlist>}></Toggle>
         </div>
         <button onClick={handleSave} className="save-button">Save</button>
       </header>
