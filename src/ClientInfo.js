@@ -260,16 +260,16 @@ function ClientInfo({ clients, setClients }) {
           {activeTab === 'profile' ? <ProfileFill /> : <Profile />}
         </div>
         <div 
-          className={`tab-button ${activeTab === 'soap' ? 'active' : ''}`} 
-          onClick={() => setActiveTab('soap')}
-        >
-          {activeTab === 'soap' ? <SoapFill /> : <Soap />}
-        </div>
-        <div 
           className={`tab-button ${activeTab === 'notes' ? 'active' : ''}`} 
           onClick={() => setActiveTab('notes')}
         >
           {activeTab === 'notes' ? <NotesFill /> : <Notes />}
+        </div>
+        <div 
+          className={`tab-button ${activeTab === 'soap' ? 'active' : ''}`} 
+          onClick={() => setActiveTab('soap')}
+        >
+          {activeTab === 'soap' ? <SoapFill /> : <Soap />}
         </div>
         <div 
           className={`tab-button ${activeTab === 'appointments' ? 'active' : ''}`} 
