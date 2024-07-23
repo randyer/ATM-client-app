@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/ATM-client-app/static/css/main.03346d00.css",
-    "main.js": "/ATM-client-app/static/js/main.857d5b88.js",
+    "main.css": "/ATM-client-app/static/css/main.edc64fd9.css",
+    "main.js": "/ATM-client-app/static/js/main.daea3ef9.js",
     "static/js/453.113d9faa.chunk.js": "/ATM-client-app/static/js/453.113d9faa.chunk.js",
     "static/media/calendar.svg": "/ATM-client-app/static/media/calendar.7e164032fea10b4aa8827b56d5cd6c30.svg",
     "static/media/calendarFill.svg": "/ATM-client-app/static/media/calendarFill.12de86795d23dd7eaf2a82f78074a10f.svg",
@@ -14,6 +14,7 @@
     "static/media/hourglass.svg": "/ATM-client-app/static/media/hourglass.34f9a3d7279c88ced445624f37fa8940.svg",
     "static/media/inventory.svg": "/ATM-client-app/static/media/inventory.ab069aa5c8d439cde612a28dc3e09225.svg",
     "static/media/add.svg": "/ATM-client-app/static/media/add.c1156484fccb71e2a4985624e689495e.svg",
+    "static/media/contentCopy.svg": "/ATM-client-app/static/media/contentCopy.661ecd421f1b3e7880f3b0c02350f744.svg",
     "static/media/inventoryFill.svg": "/ATM-client-app/static/media/inventoryFill.c973f2e268975f44c6119601cc3c8f79.svg",
     "static/media/personFill.svg": "/ATM-client-app/static/media/personFill.8e1b1cb197910a6c16b3c5c141473be3.svg",
     "static/media/note.svg": "/ATM-client-app/static/media/note.5ef84a6da6f54ef6d6a5922bb73ec0ea.svg",
@@ -22,12 +23,12 @@
     "static/media/hourglassFill.svg": "/ATM-client-app/static/media/hourglassFill.e26933fea057a1ab92a5baf67276f348.svg",
     "static/media/startFill.svg": "/ATM-client-app/static/media/startFill.8aac720df11d74fe35f36b71d132a5a7.svg",
     "static/media/backArrow.svg": "/ATM-client-app/static/media/backArrow.4468b94c51cfd1c1470cdb15e22e0373.svg",
-    "main.03346d00.css.map": "/ATM-client-app/static/css/main.03346d00.css.map",
-    "main.857d5b88.js.map": "/ATM-client-app/static/js/main.857d5b88.js.map",
+    "main.edc64fd9.css.map": "/ATM-client-app/static/css/main.edc64fd9.css.map",
+    "main.daea3ef9.js.map": "/ATM-client-app/static/js/main.daea3ef9.js.map",
     "453.113d9faa.chunk.js.map": "/ATM-client-app/static/js/453.113d9faa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.03346d00.css",
-    "static/js/main.857d5b88.js"
+    "static/css/main.edc64fd9.css",
+    "static/js/main.daea3ef9.js"
   ]
 }
