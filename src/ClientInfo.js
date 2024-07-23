@@ -254,8 +254,8 @@ function ClientInfo({ clients, setClients }) {
         {/* <div className="tab-bar"> */}
           <Toggle val={editableClient.favorite} onToggle={handleToggleFavorite} isTrue={<StarFill></StarFill>} isFalse={<Star></Star>}></Toggle>
           <Toggle val={editableClient.needsReview} onToggle={handleToggleNeedsReview} isTrue={<NeedsReview></NeedsReview>} isFalse={<NoReview></NoReview>}></Toggle>
-          <Toggle val={editableClient.active} onToggle={handleToggleActive} isTrue={<Active></Active>} isFalse={<Archived></Archived>}></Toggle>
           <Toggle val={editableClient.waitlisted} onToggle={handleToggleWaitlist} isTrue={<WaitlistFill></WaitlistFill>} isFalse={<Waitlist></Waitlist>}></Toggle>
+          <Toggle val={editableClient.active} onToggle={handleToggleActive} isTrue={<Active></Active>} isFalse={<Archived></Archived>}></Toggle>
         </div>
         <button onClick={handleSave} className="save-button">Save</button>
       </header>
