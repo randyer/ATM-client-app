@@ -93,7 +93,11 @@
   border-radius: 5px;
 }
 
-.client-details,
+.copy{
+  background-color: transparent;
+  border: transparent;  
+}
+
 .soap-notes,
 .appointments {
   /* background: var(--input-bg); */
@@ -101,10 +105,14 @@
   border-radius: 5px;
 }
 
+.client-details{
+  text-align: start;
+}
+
 .client-details p,
 .soap-notes p,
 .appointments ul {
-  margin: 0.5rem 0;
+  margin: 0.5rem;
 }
 
 .client-details strong,
@@ -112,11 +120,22 @@
   display: inline-block;
 }
 
-.client-details input,
 .soap-notes textarea,
 .general-notes textarea {
   width: 95%;
   padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background-color: var(--input-bg);
+  color: var(--foreground);
+}
+
+.client-details input{
+  /* width: 95%; */
+  padding: 0.5rem;
+  margin: 0.5rem;
+  width: auto;
   font-size: 1rem;
   border: 1px solid var(--border);
   border-radius: 5px;
