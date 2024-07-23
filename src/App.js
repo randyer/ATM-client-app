@@ -326,11 +326,11 @@ function App() {
                   <button className={`tab ${activeTab === 'active' ? 'active' : ''}`} onClick={() => setActiveTab('active')}>
                     Active
                   </button>
-                  <button className={`tab ${activeTab === 'archive' ? 'active' : ''}`} onClick={() => setActiveTab('archive')}>
-                    Archive
-                  </button>
                   <button className={`tab ${activeTab === 'waitlist' ? 'active' : ''}`} onClick={() => setActiveTab('waitlist')}>
                     Waitlist
+                  </button>
+                  <button className={`tab ${activeTab === 'archive' ? 'active' : ''}`} onClick={() => setActiveTab('archive')}>
+                    Archive
                   </button>
                 </div>
                 <input
