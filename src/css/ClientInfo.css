@@ -67,7 +67,6 @@
   display: flex;
   justify-self: center;
   justify-content: space-around;
-  /* max-width: 20rem; */
   background-color: var(--hover-bg);
   padding: 0.5rem;
   margin: 1rem;
@@ -97,7 +96,7 @@
 .client-details,
 .soap-notes,
 .appointments {
-  background: var(--input-bg);
+  /* background: var(--input-bg); */
   padding: 1rem;
   border-radius: 5px;
 }

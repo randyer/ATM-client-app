@@ -28,7 +28,8 @@ function App() {
       pastSurgeries: 'Appendectomy',
       active: true,
       favorite: true,
-      needsReview: false
+      needsReview: false,
+      waitlisted: false
     },
     {
       id: 2,
@@ -47,7 +48,8 @@ function App() {
       pastSurgeries: 'Knee surgery',
       active: true,
       favorite: false,
-      needsReview: false
+      needsReview: false,
+      waitlisted: false
     },
     {
       id: 3,
@@ -66,7 +68,8 @@ function App() {
       pastSurgeries: 'Gallbladder removal',
       active: true,
       favorite: true,
-      needsReview: true
+      needsReview: true,
+      waitlisted: false
     },
     {
       id: 4,
@@ -85,7 +88,8 @@ function App() {
       pastSurgeries: 'Hernia repair',
       active: true,
       favorite: false,
-      needsReview: false
+      needsReview: false,
+      waitlisted: false
     },
     {
       id: 5,
@@ -104,7 +108,8 @@ function App() {
       pastSurgeries: 'C-section',
       active: true,
       favorite: true,
-      needsReview: false
+      needsReview: false,
+      waitlisted: false
     },
     {
       id: 6,
@@ -123,7 +128,8 @@ function App() {
       pastSurgeries: 'Hip replacement',
       active: true,
       favorite: false,
-      needsReview: true
+      needsReview: true,
+      waitlisted: false
     },
     {
       id: 7,
@@ -142,7 +148,8 @@ function App() {
       pastSurgeries: 'Thyroidectomy',
       active: true,
       favorite: true,
-      needsReview: false
+      needsReview: false,
+      waitlisted: false
     },
     {
       id: 8,
@@ -161,7 +168,8 @@ function App() {
       pastSurgeries: 'Rotator cuff repair',
       active: true,
       favorite: false,
-      needsReview: true
+      needsReview: true,
+      waitlisted: false
     },
     {
       id: 9,
@@ -180,7 +188,8 @@ function App() {
       pastSurgeries: 'Bunionectomy',
       active: true,
       favorite: false,
-      needsReview: false
+      needsReview: false,
+      waitlisted: false
     },
     {
       id: 10,
@@ -199,7 +208,8 @@ function App() {
       pastSurgeries: 'Nasal surgery',
       active: false,
       favorite: true,
-      needsReview: true
+      needsReview: true,
+      waitlisted: false
     },
     {
       id: 11,
@@ -218,7 +228,8 @@ function App() {
       pastSurgeries: 'Spinal fusion',
       active: true,
       favorite: false,
-      needsReview: false
+      needsReview: false,
+      waitlisted: false
     },
     {
       id: 12,
@@ -237,7 +248,8 @@ function App() {
       pastSurgeries: 'Appendectomy',
       active: true,
       favorite: true,
-      needsReview: true
+      needsReview: true,
+      waitlisted: true
     }
   ]);
   
@@ -278,7 +290,9 @@ function App() {
           pastInjuries: newPastInjuries,
           pastSurgeries: newPastSurgeries,
           active: true,
-          favorite: false
+          favorite: false,
+          needsReview: false,
+          waitlisted: false
         }
       ]);
     }
@@ -290,7 +304,9 @@ function App() {
 
   const filteredClients = clients.filter(client =>
     (client.firstName + ' ' + client.lastName).toLowerCase().includes(search.toLowerCase()) &&
-    ((activeTab === 'active' && client.active) || (activeTab === 'archive' && !client.active))
+    ((activeTab === 'active' && client.active && !client.waitlisted) || 
+      (activeTab === 'waitlist' && client.waitlisted) || 
+      (activeTab === 'archive' && !client.active))
   );
 
   return (
@@ -301,7 +317,6 @@ function App() {
             path="/"
             element={
               <>
-              {/*className='fixed'*/}
                <div className='fixed'> 
                 <header className="App-header">
                   <h1>Clients</h1>
@@ -309,10 +324,13 @@ function App() {
                 </header>
                 <div className="tabs">
                   <button className={`tab ${activeTab === 'active' ? 'active' : ''}`} onClick={() => setActiveTab('active')}>
-                    Active Clients
+                    Active
                   </button>
                   <button className={`tab ${activeTab === 'archive' ? 'active' : ''}`} onClick={() => setActiveTab('archive')}>
                     Archive
+                  </button>
+                  <button className={`tab ${activeTab === 'waitlist' ? 'active' : ''}`} onClick={() => setActiveTab('waitlist')}>
+                    Waitlist
                   </button>
                 </div>
                 <input
@@ -322,7 +340,6 @@ function App() {
                   onChange={(e) => setSearch(e.target.value)}
                   className="search-bar"
                 />
-
               </div>
                 <ul className="client-list">
                   {filteredClients.map(client => (
