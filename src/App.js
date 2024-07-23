@@ -309,7 +309,7 @@ function App() {
                 </header>
                 <div className="tabs">
                   <button className={`tab ${activeTab === 'active' ? 'active' : ''}`} onClick={() => setActiveTab('active')}>
-                    Active Clients
+                    Active
                   </button>
                   <button className={`tab ${activeTab === 'archive' ? 'active' : ''}`} onClick={() => setActiveTab('archive')}>
                     Archive
