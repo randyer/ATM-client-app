@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import ClientInfo from './ClientInfo';
+import ScrollToTop from './components/ScrollToTop';
+
+//css
 import './css/App.css';
 import './css/variables.css';
 
@@ -325,9 +328,6 @@ function App() {
     }
   ]);
   
-  
-  
-
   const [search, setSearch] = useState('');
   const [activeTab, setActiveTab] = useState('active');
 
@@ -385,6 +385,7 @@ function App() {
 
   return (
     <Router basename='/ATM-client-app'>
+    <ScrollToTop/>
       <div className="App">
         <Routes>
           <Route
