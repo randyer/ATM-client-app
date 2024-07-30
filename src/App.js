@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ClientInfo from './ClientInfo';
+
+//components
+import ClientList from './components/ClientList';
+import ScrollToTop from './components/ScrollToTop';
+
+//css
 import './css/App.css';
 import './css/variables.css';
 
 // svgs
-import { ReactComponent as NeedsReview } from './icons/importantFill.svg';
 import { ReactComponent as AddButton } from './icons/add.svg';
-import { ReactComponent as StarFill } from './icons/startFill.svg';
 
 function App() {
   const [clients, setClients] = useState([
@@ -18,7 +22,12 @@ function App() {
       phone: '555-522-8243',
       email: 'anna-haro@mac.com',
       dob: '1980-01-01',
-      address: '123 Apple St, Cupertino, CA',
+      address: {
+        street: '123 Apple St',
+        city: 'Cupertino',
+        state: 'CA',
+        zip: '95014'
+      },
       emergencyContact: 'John Haro',
       emergencyContactPhone: '555-123-4567',
       heardAboutUs: 'Google',
@@ -26,6 +35,7 @@ function App() {
       pastSymptoms: 'Back pain',
       pastInjuries: 'Broken leg',
       pastSurgeries: 'Appendectomy',
+      formData: 'Current Symptoms: Headache\nPast Symptoms: Back pain\nPast Injuries: Broken leg\nPast Surgeries: Appendectomy',
       active: true,
       favorite: true,
       needsReview: false,
@@ -38,7 +48,12 @@ function App() {
       phone: '555-478-7672',
       email: 'd-higgins@mac.com',
       dob: '1985-02-15',
-      address: '456 Banana Blvd, Cupertino, CA',
+      address: {
+        street: '456 Banana Blvd',
+        city: 'Cupertino',
+        state: 'CA',
+        zip: '95014'
+      },
       emergencyContact: 'Jane Higgins',
       emergencyContactPhone: '555-234-5678',
       heardAboutUs: 'Facebook',
@@ -46,6 +61,7 @@ function App() {
       pastSymptoms: 'Shoulder pain',
       pastInjuries: 'Sprained ankle',
       pastSurgeries: 'Knee surgery',
+      formData: 'Current Symptoms: Neck pain\nPast Symptoms: Shoulder pain\nPast Injuries: Sprained ankle\nPast Surgeries: Knee surgery',
       active: true,
       favorite: false,
       needsReview: false,
@@ -58,7 +74,12 @@ function App() {
       phone: '555-123-4567',
       email: 'jane.doe@example.com',
       dob: '1990-03-12',
-      address: '789 Cherry Ln, Cupertino, CA',
+      address: {
+        street: '789 Cherry Ln',
+        city: 'Cupertino',
+        state: 'CA',
+        zip: '95014'
+      },
       emergencyContact: 'John Doe',
       emergencyContactPhone: '555-345-6789',
       heardAboutUs: 'Instagram',
@@ -66,6 +87,7 @@ function App() {
       pastSymptoms: 'Migraine',
       pastInjuries: 'Wrist fracture',
       pastSurgeries: 'Gallbladder removal',
+      formData: 'Current Symptoms: Lower back pain\nPast Symptoms: Migraine\nPast Injuries: Wrist fracture\nPast Surgeries: Gallbladder removal',
       active: true,
       favorite: true,
       needsReview: true,
@@ -78,7 +100,12 @@ function App() {
       phone: '555-678-1234',
       email: 'john.smith@example.com',
       dob: '1975-04-22',
-      address: '101 Pine St, Cupertino, CA',
+      address: {
+        street: '101 Pine St',
+        city: 'Cupertino',
+        state: 'CA',
+        zip: '95014'
+      },
       emergencyContact: 'Jane Smith',
       emergencyContactPhone: '555-456-7890',
       heardAboutUs: 'Referral',
@@ -86,6 +113,7 @@ function App() {
       pastSymptoms: 'Tennis elbow',
       pastInjuries: 'Dislocated shoulder',
       pastSurgeries: 'Hernia repair',
+      formData: 'Current Symptoms: Knee pain\nPast Symptoms: Tennis elbow\nPast Injuries: Dislocated shoulder\nPast Surgeries: Hernia repair',
       active: true,
       favorite: false,
       needsReview: false,
@@ -98,7 +126,12 @@ function App() {
       phone: '555-789-1234',
       email: 'emily.johnson@example.com',
       dob: '1988-05-15',
-      address: '202 Maple Ave, Cupertino, CA',
+      address: {
+        street: '202 Maple Ave',
+        city: 'Cupertino',
+        state: 'CA',
+        zip: '95014'
+      },
       emergencyContact: 'Robert Johnson',
       emergencyContactPhone: '555-567-8901',
       heardAboutUs: 'Yelp',
@@ -106,6 +139,7 @@ function App() {
       pastSymptoms: 'Carpal tunnel',
       pastInjuries: 'Ankle sprain',
       pastSurgeries: 'C-section',
+      formData: 'Current Symptoms: Shoulder pain\nPast Symptoms: Carpal tunnel\nPast Injuries: Ankle sprain\nPast Surgeries: C-section',
       active: true,
       favorite: true,
       needsReview: false,
@@ -118,7 +152,12 @@ function App() {
       phone: '555-890-1234',
       email: 'michael.brown@example.com',
       dob: '1965-06-30',
-      address: '303 Birch Rd, Cupertino, CA',
+      address: {
+        street: '303 Birch Rd',
+        city: 'Cupertino',
+        state: 'CA',
+        zip: '95014'
+      },
       emergencyContact: 'Laura Brown',
       emergencyContactPhone: '555-678-9012',
       heardAboutUs: 'Twitter',
@@ -126,6 +165,7 @@ function App() {
       pastSymptoms: 'Sciatica',
       pastInjuries: 'ACL tear',
       pastSurgeries: 'Hip replacement',
+      formData: 'Current Symptoms: Hip pain\nPast Symptoms: Sciatica\nPast Injuries: ACL tear\nPast Surgeries: Hip replacement',
       active: true,
       favorite: false,
       needsReview: true,
@@ -138,7 +178,12 @@ function App() {
       phone: '555-901-2345',
       email: 'lisa.taylor@example.com',
       dob: '1992-07-08',
-      address: '404 Oak Dr, Cupertino, CA',
+      address: {
+        street: '404 Oak Dr',
+        city: 'Cupertino',
+        state: 'CA',
+        zip: '95014'
+      },
       emergencyContact: 'David Taylor',
       emergencyContactPhone: '555-789-0123',
       heardAboutUs: 'LinkedIn',
@@ -146,6 +191,7 @@ function App() {
       pastSymptoms: 'Fibromyalgia',
       pastInjuries: 'Concussion',
       pastSurgeries: 'Thyroidectomy',
+      formData: 'Current Symptoms: Wrist pain\nPast Symptoms: Fibromyalgia\nPast Injuries: Concussion\nPast Surgeries: Thyroidectomy',
       active: true,
       favorite: true,
       needsReview: false,
@@ -158,7 +204,12 @@ function App() {
       phone: '555-012-3456',
       email: 'james.williams@example.com',
       dob: '1970-08-20',
-      address: '505 Cedar St, Cupertino, CA',
+      address: {
+        street: '505 Cedar St',
+        city: 'Cupertino',
+        state: 'CA',
+        zip: '95014'
+      },
       emergencyContact: 'Sara Williams',
       emergencyContactPhone: '555-890-1234',
       heardAboutUs: 'Flyer',
@@ -166,6 +217,7 @@ function App() {
       pastSymptoms: 'Gout',
       pastInjuries: 'Rib fracture',
       pastSurgeries: 'Rotator cuff repair',
+      formData: 'Current Symptoms: Elbow pain\nPast Symptoms: Gout\nPast Injuries: Rib fracture\nPast Surgeries: Rotator cuff repair',
       active: true,
       favorite: false,
       needsReview: true,
@@ -178,7 +230,12 @@ function App() {
       phone: '555-123-6789',
       email: 'karen.martinez@example.com',
       dob: '1982-09-10',
-      address: '606 Elm St, Cupertino, CA',
+      address: {
+        street: '606 Elm St',
+        city: 'Cupertino',
+        state: 'CA',
+        zip: '95014'
+      },
       emergencyContact: 'Carlos Martinez',
       emergencyContactPhone: '555-234-5678',
       heardAboutUs: 'Radio',
@@ -186,6 +243,7 @@ function App() {
       pastSymptoms: 'Plantar fasciitis',
       pastInjuries: 'Toe fracture',
       pastSurgeries: 'Bunionectomy',
+      formData: 'Current Symptoms: Ankle pain\nPast Symptoms: Plantar fasciitis\nPast Injuries: Toe fracture\nPast Surgeries: Bunionectomy',
       active: true,
       favorite: false,
       needsReview: false,
@@ -198,7 +256,12 @@ function App() {
       phone: '555-234-7890',
       email: 'robert.anderson@example.com',
       dob: '1985-10-25',
-      address: '707 Pine Ln, Cupertino, CA',
+      address: {
+        street: '707 Pine Ln',
+        city: 'Cupertino',
+        state: 'CA',
+        zip: '95014'
+      },
       emergencyContact: 'Laura Anderson',
       emergencyContactPhone: '555-345-6789',
       heardAboutUs: 'TV ad',
@@ -206,6 +269,7 @@ function App() {
       pastSymptoms: 'TMJ',
       pastInjuries: 'Collarbone fracture',
       pastSurgeries: 'Nasal surgery',
+      formData: 'Current Symptoms: Neck pain\nPast Symptoms: TMJ\nPast Injuries: Collarbone fracture\nPast Surgeries: Nasal surgery',
       active: false,
       favorite: true,
       needsReview: true,
@@ -218,7 +282,12 @@ function App() {
       phone: '555-345-8901',
       email: 'patricia.clark@example.com',
       dob: '1991-11-05',
-      address: '808 Willow St, Cupertino, CA',
+      address: {
+        street: '808 Willow St',
+        city: 'Cupertino',
+        state: 'CA',
+        zip: '95014'
+      },
       emergencyContact: 'Thomas Clark',
       emergencyContactPhone: '555-456-7890',
       heardAboutUs: 'Newspaper',
@@ -226,6 +295,7 @@ function App() {
       pastSymptoms: 'Arthritis',
       pastInjuries: 'Knee sprain',
       pastSurgeries: 'Spinal fusion',
+      formData: 'Current Symptoms: Jaw pain\n\nPast Symptoms: Arthritis\n\nPast Injuries: Knee sprain, Knee sprain, Knee sprain, Knee sprain\n\nPast Surgeries: Spinal fusion',
       active: true,
       favorite: false,
       needsReview: false,
@@ -238,7 +308,12 @@ function App() {
       phone: '555-456-9012',
       email: 'christopher.lee@example.com',
       dob: '1987-12-12',
-      address: '909 Spruce Rd, Cupertino, CA',
+      address: {
+        street: '909 Spruce Rd',
+        city: 'Cupertino',
+        state: 'CA',
+        zip: '95014'
+      },
       emergencyContact: 'Michelle Lee',
       emergencyContactPhone: '555-567-8901',
       heardAboutUs: 'Billboard',
@@ -246,6 +321,7 @@ function App() {
       pastSymptoms: 'Asthma',
       pastInjuries: 'Forearm fracture',
       pastSurgeries: 'Appendectomy',
+      formData: 'Current Symptoms: Shoulder pain\nPast Symptoms: Asthma\nPast Injuries: Forearm fracture\nPast Surgeries: Appendectomy',
       active: true,
       favorite: true,
       needsReview: true,
@@ -253,7 +329,6 @@ function App() {
     }
   ]);
   
-
   const [search, setSearch] = useState('');
   const [activeTab, setActiveTab] = useState('active');
 
@@ -311,6 +386,7 @@ function App() {
 
   return (
     <Router basename='/ATM-client-app'>
+    <ScrollToTop/>
       <div className="App">
         <Routes>
           <Route
@@ -341,26 +417,7 @@ function App() {
                   className="search-bar"
                 />
               </div>
-                <ul className="client-list">
-                  {filteredClients.map(client => (
-                    <li key={client.id} className="client-item">
-                      <Link to={`/client/${client.id}`} className="client-link">
-                      <div className='client-info-container'>
-                        <div className="client-initials">{getInitials(client.firstName, client.lastName)}</div>
-                        <div className="client-info">
-                          <div className="client-name">{client.firstName} {client.lastName} </div>
-                          <div className="client-phone">{client.phone}</div>
-                          {client.email && <div className="client-email">{client.email}</div>}
-                        </div>
-                      </div>
-                      <div className='client-info-container'>
-                        {client.needsReview ? <NeedsReview className='svg-icon'></NeedsReview> : <NeedsReview className='svg-icon-hidden'></NeedsReview>}
-                        {client.favorite ? <StarFill className='svg-icon'></StarFill>: <StarFill className='svg-icon-hidden'></StarFill>}
-                      </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+              <ClientList clients={filteredClients} getInitials={getInitials} waitlist={activeTab === 'waitlist'} setClients={setClients} />
               </>
             }
           />

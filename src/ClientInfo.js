@@ -3,6 +3,8 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import './css/ClientInfo.css';
 import './css/variables.css';
 import Toggle from './components/ToggleButton';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 
 // icons
 import {ReactComponent as Archived} from './icons/inventoryFill.svg'
@@ -22,6 +24,7 @@ import { ReactComponent as Appointment } from './icons/calendar.svg';
 import { ReactComponent as AppointmentFill } from './icons/calendarFill.svg';
 import { ReactComponent as Waitlist } from './icons/hourglass.svg';
 import { ReactComponent as WaitlistFill } from './icons/hourglassFill.svg';
+import { ReactComponent as Copy } from './icons/contentCopy.svg';
 
 function ClientInfo({ clients, setClients }) {
   const { id } = useParams();
@@ -97,7 +100,11 @@ function ClientInfo({ clients, setClients }) {
           value={editableClient.phone} 
           onChange={handleChange}
         />
+        <CopyToClipboard text={editableClient.phone}>
+          <button className='copy'><Copy/></button>
+        </CopyToClipboard>
       </p>
+
       {editableClient.email && (
         <p>
           <strong>Email:</strong> 
@@ -107,6 +114,9 @@ function ClientInfo({ clients, setClients }) {
             value={editableClient.email} 
             onChange={handleChange}
           />
+          <CopyToClipboard text={editableClient.email}>
+            <button className='copy'><Copy/></button>
+          </CopyToClipboard>
         </p>
       )}
       <p>
@@ -119,11 +129,38 @@ function ClientInfo({ clients, setClients }) {
         />
       </p>
       <p>
-        <strong>Address:</strong> 
+        <strong>Street Address:</strong> 
         <input 
           type="text" 
-          name="address" 
-          value={editableClient.address} 
+          name="street" 
+          value={editableClient.address.street} 
+          onChange={handleChange}
+        />
+      </p>
+      <p>
+        <strong>City:</strong> 
+        <input 
+          type="text" 
+          name="city" 
+          value={editableClient.address.city} 
+          onChange={handleChange}
+        />
+      </p>
+      <p>
+        <strong>State:</strong> 
+        <input 
+          type="text" 
+          name="state" 
+          value={editableClient.address.state} 
+          onChange={handleChange}
+        />
+      </p>
+      <p>
+        <strong>Zip Code:</strong> 
+        <input 
+          type="text" 
+          name="zip" 
+          value={editableClient.address.zip} 
           onChange={handleChange}
         />
       </p>
@@ -144,6 +181,9 @@ function ClientInfo({ clients, setClients }) {
           value={editableClient.emergencyContactPhone} 
           onChange={handleChange}
         />
+         <CopyToClipboard text={editableClient.emergencyContactPhone}>
+            <button className='copy'><Copy/></button>
+          </CopyToClipboard>
       </p>
       <p>
         <strong>How did you hear about us:</strong> 
@@ -154,7 +194,7 @@ function ClientInfo({ clients, setClients }) {
           onChange={handleChange}
         />
       </p>
-      <p>
+      {/* <p>
         <strong>Current Symptoms:</strong> 
         <input 
           type="text" 
@@ -189,15 +229,15 @@ function ClientInfo({ clients, setClients }) {
           value={editableClient.pastSurgeries} 
           onChange={handleChange}
         />
-      </p>
+      </p> */}
     </div>
   );
 
   const renderSoapTab = () => (
     <div className="soap-notes">
       <p>
-        <strong>Subjective: </strong> (Onset/Location/Intensity/Frequency)
-        <textarea name="subjective" value={editableClient.subjective || ''} onChange={handleChange}></textarea>
+        <strong>Overview: </strong> 
+        <textarea name="formData" value={editableClient.formData || ''} onChange={handleChange}></textarea>
       </p>
       <p>
         <strong>Objective: </strong> (Visual/Palpable)
@@ -301,3 +341,4 @@ function ClientInfo({ clients, setClients }) {
 }
 
 export default ClientInfo;
+
