@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ClientInfo from './ClientInfo';
+
+//components
+import ClientList from './components/ClientList';
 import ScrollToTop from './components/ScrollToTop';
 
 //css
@@ -8,9 +11,7 @@ import './css/App.css';
 import './css/variables.css';
 
 // svgs
-import { ReactComponent as NeedsReview } from './icons/importantFill.svg';
 import { ReactComponent as AddButton } from './icons/add.svg';
-import { ReactComponent as StarFill } from './icons/startFill.svg';
 
 function App() {
   const [clients, setClients] = useState([
@@ -416,26 +417,7 @@ function App() {
                   className="search-bar"
                 />
               </div>
-                <ul className="client-list">
-                  {filteredClients.map(client => (
-                    <li key={client.id} className="client-item">
-                      <Link to={`/client/${client.id}`} className="client-link">
-                      <div className='client-info-container'>
-                        <div className="client-initials">{getInitials(client.firstName, client.lastName)}</div>
-                        <div className="client-info">
-                          <div className="client-name">{client.firstName} {client.lastName} </div>
-                          <div className="client-phone">{client.phone}</div>
-                          {client.email && <div className="client-email">{client.email}</div>}
-                        </div>
-                      </div>
-                      <div className='client-info-container'>
-                        {client.needsReview ? <NeedsReview className='svg-icon'></NeedsReview> : <NeedsReview className='svg-icon-hidden'></NeedsReview>}
-                        {client.favorite ? <StarFill className='svg-icon'></StarFill>: <StarFill className='svg-icon-hidden'></StarFill>}
-                      </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+              <ClientList clients={filteredClients} getInitials={getInitials} waitlist={activeTab === 'waitlist'} setClients={setClients} />
               </>
             }
           />
