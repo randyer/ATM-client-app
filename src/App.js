@@ -294,7 +294,7 @@ function App() {
       pastSymptoms: 'Arthritis',
       pastInjuries: 'Knee sprain',
       pastSurgeries: 'Spinal fusion',
-      formData: 'Current Symptoms: Jaw pain\nPast Symptoms: Arthritis\nPast Injuries: Knee sprain\nPast Surgeries: Spinal fusion',
+      formData: 'Current Symptoms: Jaw pain\n\nPast Symptoms: Arthritis\n\nPast Injuries: Knee sprain, Knee sprain, Knee sprain, Knee sprain\n\nPast Surgeries: Spinal fusion',
       active: true,
       favorite: false,
       needsReview: false,

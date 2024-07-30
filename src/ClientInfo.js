@@ -237,7 +237,7 @@ function ClientInfo({ clients, setClients }) {
     <div className="soap-notes">
       <p>
         <strong>Overview: </strong> 
-        <textarea name="subjective" value={editableClient.formData || ''} onChange={handleChange}></textarea>
+        <textarea name="formData" value={editableClient.formData || ''} onChange={handleChange}></textarea>
       </p>
       <p>
         <strong>Objective: </strong> (Visual/Palpable)
