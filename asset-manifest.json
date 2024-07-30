@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ATM-client-app/static/css/main.edc64fd9.css",
-    "main.js": "/ATM-client-app/static/js/main.daea3ef9.js",
+    "main.js": "/ATM-client-app/static/js/main.b497d9a0.js",
     "static/js/453.113d9faa.chunk.js": "/ATM-client-app/static/js/453.113d9faa.chunk.js",
     "static/media/calendar.svg": "/ATM-client-app/static/media/calendar.7e164032fea10b4aa8827b56d5cd6c30.svg",
     "static/media/calendarFill.svg": "/ATM-client-app/static/media/calendarFill.12de86795d23dd7eaf2a82f78074a10f.svg",
@@ -24,11 +24,11 @@
     "static/media/startFill.svg": "/ATM-client-app/static/media/startFill.8aac720df11d74fe35f36b71d132a5a7.svg",
     "static/media/backArrow.svg": "/ATM-client-app/static/media/backArrow.4468b94c51cfd1c1470cdb15e22e0373.svg",
     "main.edc64fd9.css.map": "/ATM-client-app/static/css/main.edc64fd9.css.map",
-    "main.daea3ef9.js.map": "/ATM-client-app/static/js/main.daea3ef9.js.map",
+    "main.b497d9a0.js.map": "/ATM-client-app/static/js/main.b497d9a0.js.map",
     "453.113d9faa.chunk.js.map": "/ATM-client-app/static/js/453.113d9faa.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.edc64fd9.css",
-    "static/js/main.daea3ef9.js"
+    "static/js/main.b497d9a0.js"
   ]
 }
