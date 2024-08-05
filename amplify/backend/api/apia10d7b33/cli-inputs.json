@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/customers/{customerPhone}": {
+      "name": "/customers/{customerPhone}",
+      "lambdaFunction": "customerHandler",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

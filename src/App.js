@@ -1,19 +1,37 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ClientInfo from './ClientInfo';
+import { get, post } from 'aws-amplify/api';
 
 //components
 import ClientList from './components/ClientList';
 import ScrollToTop from './components/ScrollToTop';
-
 //css
 import './css/App.css';
 import './css/variables.css';
-
 // svgs
 import { ReactComponent as AddButton } from './icons/add.svg';
 
+const myAPI = "apia10d7b33";
+const path = "/customers"
+
 function App() {
+
+  async function getCustomer(e) {
+    let customerPhone = e.input
+    const restOperation = get({apiName: myAPI, path: path + "/" + customerPhone})
+    const { body } = await restOperation.response;
+    const response = await body.json();
+    console.log(response)
+    let newCustomers = [...customers]
+    newCustomers.push(response)
+    setCustomers(newCustomers)
+    console.log(customers)
+  }
+
+  const [input, setInput] = useState("")
+  const [customers, setCustomers] = useState([])
+  
   const [clients, setClients] = useState([
     {
       id: 1,
@@ -385,46 +403,65 @@ function App() {
   );
 
   return (
-    <Router basename='/ATM-client-app'>
-    <ScrollToTop/>
-      <div className="App">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-               <div className='fixed'> 
-                <header className="App-header">
-                  <h1>Clients</h1>
-                  <AddButton onClick={addClient} className='svg-icon'></AddButton>
-                </header>
-                <div className="tabs">
-                  <button className={`tab ${activeTab === 'active' ? 'active' : ''}`} onClick={() => setActiveTab('active')}>
-                    Active
-                  </button>
-                  <button className={`tab ${activeTab === 'waitlist' ? 'active' : ''}`} onClick={() => setActiveTab('waitlist')}>
-                    Waitlist
-                  </button>
-                  <button className={`tab ${activeTab === 'archive' ? 'active' : ''}`} onClick={() => setActiveTab('archive')}>
-                    Archive
-                  </button>
-                </div>
-                <input
-                  type="text"
-                  placeholder="Search"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="search-bar"
-                />
-              </div>
-              <ClientList clients={filteredClients} getInitials={getInitials} waitlist={activeTab === 'waitlist'} setClients={setClients} />
-              </>
-            }
-          />
-          <Route path="/client/:id" element={<ClientInfo clients={clients} setClients={setClients} />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="App">
+    <h1>Super Simple React App</h1>
+    <div>
+        <input placeholder="customer id" type="text" value={input} onChange={(e) => setInput(e.target.value)}/>      
+    </div>
+    <br/>
+    <button onClick={() => getCustomer({input})}>Get Customer From Backend</button>
+
+    <h2 style={{visibility: customers.length > 0 ? 'visible' : 'hidden' }}>Response</h2>
+    {
+       customers.map((thisCustomer, index) => {
+         return (
+        <div key={thisCustomer.customerId}>
+          <span><b>CustomerPhone:</b> {thisCustomer.customerPhone} - <b>CustomerName</b>: {thisCustomer.customerName}</span>
+        </div>)
+       })
+      }
+  </div>
+
+    // <Router basename=''>
+    // <ScrollToTop/>
+    //   <div className="App">
+    //     <Routes>
+    //       <Route
+    //         path="/"
+    //         element={
+    //           <>
+    //            <div className='fixed'> 
+    //             <header className="App-header">
+    //               <h1>Clients</h1>
+    //               <AddButton onClick={addClient} className='svg-icon'></AddButton>
+    //             </header>
+    //             <div className="tabs">
+    //               <button className={`tab ${activeTab === 'active' ? 'active' : ''}`} onClick={() => setActiveTab('active')}>
+    //                 Active
+    //               </button>
+    //               <button className={`tab ${activeTab === 'waitlist' ? 'active' : ''}`} onClick={() => setActiveTab('waitlist')}>
+    //                 Waitlist
+    //               </button>
+    //               <button className={`tab ${activeTab === 'archive' ? 'active' : ''}`} onClick={() => setActiveTab('archive')}>
+    //                 Archive
+    //               </button>
+    //             </div>
+    //             <input
+    //               type="text"
+    //               placeholder="Search"
+    //               value={search}
+    //               onChange={(e) => setSearch(e.target.value)}
+    //               className="search-bar"
+    //             />
+    //           </div>
+    //           <ClientList clients={filteredClients} getInitials={getInitials} waitlist={activeTab === 'waitlist'} setClients={setClients} />
+    //           </>
+    //         }
+    //       />
+    //       <Route path="/client/:id" element={<ClientInfo clients={clients} setClients={setClients} />} />
+    //     </Routes>
+    //   </div>
+    // </Router>
   );
 }
 

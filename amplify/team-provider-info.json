@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-atmclientapp-dev-afb60-authRole",
+      "UnauthRoleArn": "arn:aws:iam::309907852964:role/amplify-atmclientapp-dev-afb60-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::309907852964:role/amplify-atmclientapp-dev-afb60-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-atmclientapp-dev-afb60-deployment",
+      "UnauthRoleName": "amplify-atmclientapp-dev-afb60-unauthRole",
+      "StackName": "amplify-atmclientapp-dev-afb60",
+      "StackId": "arn:aws:cloudformation:us-east-2:309907852964:stack/amplify-atmclientapp-dev-afb60/b0d3c330-50dc-11ef-88cd-0619fced87c7",
+      "AmplifyAppId": "d3l8z2c1r2gzuq"
+    },
+    "categories": {
+      "function": {
+        "customerHandler": {
+          "deploymentBucketName": "amplify-atmclientapp-dev-afb60-deployment",
+          "s3Key": "amplify-builds/customerHandler-426f3647533063776d31-build.zip"
+        }
+      },
+      "api": {
+        "apia10d7b33": {}
+      }
+    }
+  }
+}
