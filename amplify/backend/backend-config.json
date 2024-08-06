@@ -1,6 +1,6 @@
 {
   "api": {
-    "apia10d7b33": {
+    "apiclient": {
       "dependsOn": [
         {
           "attributes": [
@@ -8,7 +8,7 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "customerHandler"
+          "resourceName": "getClient"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -16,26 +16,26 @@
     }
   },
   "function": {
-    "customerHandler": {
+    "getClient": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "parameters": {
-    "AMPLIFY_function_customerHandler_deploymentBucketName": {
+    "AMPLIFY_function_getClient_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "customerHandler"
+          "resourceName": "getClient"
         }
       ]
     },
-    "AMPLIFY_function_customerHandler_s3Key": {
+    "AMPLIFY_function_getClient_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "customerHandler"
+          "resourceName": "getClient"
         }
       ]
     }

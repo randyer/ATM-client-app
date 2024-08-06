@@ -13,13 +13,13 @@
     },
     "categories": {
       "function": {
-        "customerHandler": {
+        "getClient": {
           "deploymentBucketName": "amplify-atmclientapp-dev-afb60-deployment",
-          "s3Key": "amplify-builds/customerHandler-426f3647533063776d31-build.zip"
+          "s3Key": "amplify-builds/getClient-7469547176662f465962-build.zip"
         }
       },
       "api": {
-        "apia10d7b33": {}
+        "apiclient": {}
       }
     }
   }

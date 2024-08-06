@@ -12,8 +12,8 @@ import './css/variables.css';
 // svgs
 import { ReactComponent as AddButton } from './icons/add.svg';
 
-const myAPI = "apia10d7b33";
-const path = "/customers"
+const myAPI = "apiclient";
+const path = "/client"
 
 function App() {
 

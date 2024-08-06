@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "customerHandler",
+            "getClient",
             {
               "Fn::Join": [
                 "",
                 [
-                  "customerHandler",
+                  "getClient",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "atmclientappLambdaRole71702fc0",
+            "atmclientappLambdaRole3beb6e45",
             {
               "Fn::Join": [
                 "",
                 [
-                  "atmclientappLambdaRole71702fc0",
+                  "atmclientappLambdaRole3beb6e45",
                   "-",
                   {
                     "Ref": "env"

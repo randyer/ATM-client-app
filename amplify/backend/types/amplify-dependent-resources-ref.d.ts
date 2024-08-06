@@ -1,13 +1,13 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "apia10d7b33": {
+    "apiclient": {
       "ApiId": "string",
       "ApiName": "string",
       "RootUrl": "string"
     }
   },
   "function": {
-    "customerHandler": {
+    "getClient": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
