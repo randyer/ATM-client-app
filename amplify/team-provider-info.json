@@ -20,6 +20,9 @@
       },
       "api": {
         "apiclient": {}
+      },
+      "auth": {
+        "atmclientapp5ff2e639": {}
       }
     }
   }

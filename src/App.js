@@ -12,6 +12,10 @@ import './css/variables.css';
 // svgs
 import { ReactComponent as AddButton } from './icons/add.svg';
 
+import { Authenticator, withAuthenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+
+
 const myAPI = "apiclient";
 const path = "/client"
 
@@ -404,23 +408,78 @@ function App() {
 
   return (
     <div className="App">
-    <h1>Super Simple React App</h1>
-    <div>
-        <input placeholder="customer id" type="text" value={input} onChange={(e) => setInput(e.target.value)}/>      
-    </div>
-    <br/>
-    <button onClick={() => getCustomer({input})}>Get Customer From Backend</button>
-
-    <h2 style={{visibility: customers.length > 0 ? 'visible' : 'hidden' }}>Response</h2>
-    {
-       customers.map((thisCustomer, index) => {
-         return (
-        <div key={thisCustomer.customerId}>
-          <span><b>CustomerPhone:</b> {thisCustomer.customerPhone} - <b>CustomerName</b>: {thisCustomer.customerName}</span>
-        </div>)
-       })
-      }
+      <Authenticator hideSignUp={true}>
+      {({ signOut }) => (
+        <main>
+          <header className='App-header'>
+           
+            <button 
+              onClick={signOut} 
+              style={{ 
+                margin: '20px', 
+                fontSize: '0.8rem', 
+                padding: '5px 10px', 
+                marginTop: '20px'
+              }}
+            >
+              Sign Out
+            </button>
+          </header>
+          {/* Additional Content */}
+          <div className="App">
+            <h1>Super Simple React App</h1>
+            <div>
+              <input 
+                placeholder="customer id" 
+                type="text" 
+                value={input} 
+                onChange={(e) => setInput(e.target.value)}
+              />      
+            </div>
+            <br/>
+            <button onClick={() => getCustomer({input})}>
+              Get Customer From Backend
+            </button>
+            <h2 style={{visibility: customers.length > 0 ? 'visible' : 'hidden' }}>
+              Response
+            </h2>
+            {
+              customers.map((thisCustomer) => {
+                return (
+                  <div key={thisCustomer.customerId}>
+                    <span>
+                      <b>CustomerPhone:</b> {thisCustomer.customerPhone} - 
+                      <b>CustomerName</b>: {thisCustomer.customerName}
+                    </span>
+                  </div>
+                )
+              })
+            }
+          </div>
+        </main>
+      )}
+    </Authenticator>
   </div>
+
+
+  //   <div className="App">
+  //   <h1>Super Simple React App</h1>
+  //   <div>
+  //       <input placeholder="customer id" type="text" value={input} onChange={(e) => setInput(e.target.value)}/>      
+  //   </div>
+  //   <br/>
+  //   <button onClick={() => getCustomer({input})}>Get Customer From Backend</button>
+
+  //   <h2 style={{visibility: customers.length > 0 ? 'visible' : 'hidden' }}>Response</h2>
+  //   {
+  //      customers.map((thisCustomer, index) => {
+  //        return (
+  //       <div key={thisCustomer.customerId}>
+  //         <span><b>CustomerPhone:</b> {thisCustomer.customerPhone} - <b>CustomerName</b>: {thisCustomer.customerName}</span>
+  //       </div>)
+  //      })
+  //     }
+  // </div>
 
     // <Router basename=''>
     // <ScrollToTop/>
