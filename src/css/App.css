@@ -1,0 +1,139 @@
+/* App.css */
+
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
+}
+
+.App-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0rem 1rem;
+  background-color: var(--purple);
+  color: var(--foreground);
+}
+
+.add-client-button {
+  background-color: var(--purple);
+  border: none;
+  color: var(--foreground);
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  line-height: 1rem;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  color: var(--foreground);
+}
+
+.tab.active {
+  border-bottom: 2px solid var(--purple);
+}
+
+.search-bar {
+  padding: 0.5rem;
+  width: 80%;
+  max-width: 500px;
+  margin: 0.5rem 0;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background-color: var(--input-bg);
+  color: var(--foreground);
+}
+
+.client-list {
+  position: relative;
+  list-style-type: none;
+  padding: 0;
+  top: 197.88px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+}
+
+.client-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.client-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.client-link:hover {
+  background-color: var(--hover-bg);
+}
+
+/* .client-initials {
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--purple);
+  color: var(--foreground);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+} */
+
+.client-initials {
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--purple);
+  color: var(--foreground);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  min-width: 3rem; /* Ensure it stays at least 3rem wide */
+}
+
+.client-info-container {
+  display: flex;
+}
+
+.client-info {
+  text-align: left;
+}
+
+.client-name {
+  font-size: 1.2rem;
+}
+
+.client-phone,
+.client-email {
+  color: #aaa;
+}

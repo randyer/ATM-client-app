@@ -1,0 +1,133 @@
+{
+  "api": {
+    "apiclient": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "clientHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "auth": {
+    "atmclientapp5ff2e639": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "clientHandler": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getClient": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_clientHandler_dbHost": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "clientHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_clientHandler_dbName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "clientHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_clientHandler_dbPassword": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "clientHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_clientHandler_dbPort": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "clientHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_clientHandler_dbUser": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "clientHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_clientHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "clientHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_clientHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "clientHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_getClient_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getClient"
+        }
+      ]
+    },
+    "AMPLIFY_function_getClient_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getClient"
+        }
+      ]
+    }
+  }
+}
