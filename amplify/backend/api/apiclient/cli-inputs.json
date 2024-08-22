@@ -1,8 +1,15 @@
 {
   "version": 1,
   "paths": {
-    "/clients": {
-      "name": "/clients",
+    "/newPatientSubmission": {
+      "name": "/newPatientSubmission",
+      "lambdaFunction": "newPatientFormSubmission",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/client/{clientId}": {
+      "name": "/client/{clientId}",
       "lambdaFunction": "clientHandler",
       "permissions": {
         "setting": "private",
@@ -14,8 +21,8 @@
         ]
       }
     },
-    "/client/{clientId}": {
-      "name": "/client/{clientId}",
+    "/clients": {
+      "name": "/clients",
       "lambdaFunction": "clientHandler",
       "permissions": {
         "setting": "private",

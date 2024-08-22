@@ -28,10 +28,7 @@ exports.handler = async (event) => {
 
     let response;
     const method = event.httpMethod;
-    let id;
-    // = event.pathParameters?.clientId || false;
-
-    let data;
+    let id, data;
 
     // Only parse body if it's a POST, PUT, or DELETE request
     if (method === "POST" || method === "PUT" || method === "DELETE") {
@@ -41,9 +38,10 @@ exports.handler = async (event) => {
         id = event.pathParameters.clientId;
       }
     }
-    id = event.pathParameters?.clientId || false;
+
     switch (method) {
       case "GET":
+        const id = event.pathParameters?.clientId || false;
         if (id) {
           const res = await clientCONNECTION.query(
             "SELECT * FROM client WHERE id = $1",
@@ -133,7 +131,6 @@ exports.handler = async (event) => {
         break;
 
       case "DELETE":
-        id = event.pathParameters.clientId;
         const deleteQuery = "DELETE FROM client WHERE id = $1 RETURNING *;";
         const deleteRes = await clientCONNECTION.query(deleteQuery, [id]);
         response = deleteRes.rows[0];
@@ -153,6 +150,7 @@ exports.handler = async (event) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(response),
+      id,
     };
   } catch (error) {
     console.error("Database connection error", error);

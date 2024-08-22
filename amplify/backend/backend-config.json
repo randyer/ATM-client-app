@@ -8,6 +8,14 @@
             "Arn"
           ],
           "category": "function",
+          "resourceName": "newPatientFormSubmission"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
           "resourceName": "clientHandler"
         }
       ],
@@ -50,7 +58,18 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "clientREST": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "getClient": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "newPatientFormSubmission": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -113,6 +132,22 @@
         }
       ]
     },
+    "AMPLIFY_function_clientREST_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "clientREST"
+        }
+      ]
+    },
+    "AMPLIFY_function_clientREST_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "clientREST"
+        }
+      ]
+    },
     "AMPLIFY_function_getClient_deploymentBucketName": {
       "usedBy": [
         {
@@ -126,6 +161,22 @@
         {
           "category": "function",
           "resourceName": "getClient"
+        }
+      ]
+    },
+    "AMPLIFY_function_newPatientFormSubmission_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "newPatientFormSubmission"
+        }
+      ]
+    },
+    "AMPLIFY_function_newPatientFormSubmission_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "newPatientFormSubmission"
         }
       ]
     }
