@@ -346,7 +346,11 @@ function ClientInfo({ clients, setClients }) {
   return (
     <div className="client-info-page">
       <header className="client-info-header">
-        <Link to="/" className="back-button">
+        <Link
+          onClick={() => updateClient(editableClient.id)}
+          to="/"
+          className="back-button"
+        >
           <Back></Back>
         </Link>
         {/* <h1>Profile</h1> */}
