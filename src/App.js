@@ -12,6 +12,7 @@ import "./css/variables.css";
 // svgs
 import { ReactComponent as AddButton } from "./icons/add.svg";
 import { ReactComponent as SignOut } from "./icons/logout.svg";
+import { ReactComponent as Refresh } from "./icons/refresh.svg";
 
 import { Authenticator, withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
@@ -225,7 +226,11 @@ function App() {
                       <>
                         <div className="fixed">
                           <header className="App-header">
-                            <h1>Clients</h1>
+                            <button onClick={fetchClients}>
+                              <h1>
+                                Clients <Refresh className="svg-icon" />
+                              </h1>
+                            </button>
                             <AddButton
                               onClick={addClient}
                               className="svg-icon"
