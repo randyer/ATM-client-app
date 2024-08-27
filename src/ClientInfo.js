@@ -172,22 +172,21 @@ function ClientInfo({ clients, setClients }) {
         </CopyToClipboard>
       </p>
 
-      {editableClient.email && (
-        <p>
-          <strong>Email:</strong>
-          <input
-            type="text"
-            name="email"
-            value={editableClient.email}
-            onChange={handleChange}
-          />
-          <CopyToClipboard text={editableClient.email}>
-            <button className="copy">
-              <Copy />
-            </button>
-          </CopyToClipboard>
-        </p>
-      )}
+      <p>
+        <strong>Email:</strong>
+        <input
+          type="text"
+          name="email"
+          value={editableClient.email}
+          onChange={handleChange}
+        />
+        <CopyToClipboard text={editableClient.email}>
+          <button className="copy">
+            <Copy />
+          </button>
+        </CopyToClipboard>
+      </p>
+
       <p>
         <strong>Date of Birth:</strong>
         <input
