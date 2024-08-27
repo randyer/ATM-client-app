@@ -19,6 +19,7 @@ import "@aws-amplify/ui-react/styles.css";
 
 function App() {
   const [clients, setClients] = useState([]);
+  const [refreshClicked, setRefreshClicked] = useState(false);
 
   async function fetchClients() {
     try {
@@ -226,11 +227,19 @@ function App() {
                       <>
                         <div className="fixed">
                           <header className="App-header">
-                            <button onClick={fetchClients}>
+                            <button
+                              onClick={() => {
+                                setRefreshClicked(true);
+                                fetchClients();
+                                setTimeout(() => setRefreshClicked(false), 300); // Reset after 300ms
+                              }}
+                              className={refreshClicked ? "button-clicked" : ""}
+                            >
                               <h1>
                                 Clients <Refresh className="svg-icon" />
                               </h1>
                             </button>
+
                             <AddButton
                               onClick={addClient}
                               className="svg-icon"
