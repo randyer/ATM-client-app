@@ -5,7 +5,6 @@ const path = require("path");
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
-//
 exports.handler = async (event) => {
   console.log(event);
 
@@ -29,7 +28,6 @@ exports.handler = async (event) => {
     let response;
     const method = event.httpMethod;
     let id;
-    // = event.pathParameters?.clientId || false;
 
     let data;
 
@@ -38,7 +36,6 @@ exports.handler = async (event) => {
       if (event.body) {
         data =
           typeof event.body === "string" ? JSON.parse(event.body) : event.body;
-        id = event.pathParameters.clientId;
       }
     }
     id = event.pathParameters?.clientId || false;
@@ -61,9 +58,11 @@ exports.handler = async (event) => {
           INSERT INTO client (
             first_name, last_name, phone, email, dob, street, city, state, zip,
             heard_about_us, current_symptoms, past_symptoms, past_injuries, past_surgeries,
-            form_data, active, favorite, needs_review, waitlisted
+            form_data, active, favorite, needs_review, waitlisted, general_notes, assessment,
+            objective, plan, waitlist_notes, emergency_contact, emergency_contact_phone
           ) VALUES (
-            $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19
+            $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19,
+            $20, $21, $22, $23, $24, $25, $26
           ) RETURNING *;
         `;
         const insertValues = [
@@ -86,6 +85,13 @@ exports.handler = async (event) => {
           data.favorite,
           data.needs_review,
           data.waitlisted,
+          data.general_notes,
+          data.assessment,
+          data.objective,
+          data.plan,
+          data.waitlist_notes,
+          data.emergency_contact,
+          data.emergency_contact_phone,
         ];
         const insertRes = await clientCONNECTION.query(
           insertQuery,
@@ -100,8 +106,10 @@ exports.handler = async (event) => {
             first_name = $1, last_name = $2, phone = $3, email = $4, dob = $5, street = $6,
             city = $7, state = $8, zip = $9, heard_about_us = $10, current_symptoms = $11,
             past_symptoms = $12, past_injuries = $13, past_surgeries = $14, form_data = $15,
-            active = $16, favorite = $17, needs_review = $18, waitlisted = $19
-          WHERE id = $20 RETURNING *;
+            active = $16, favorite = $17, needs_review = $18, waitlisted = $19,
+            general_notes = $20, assessment = $21, objective = $22, plan = $23,
+            waitlist_notes = $24, emergency_contact = $25, emergency_contact_phone = $26
+          WHERE id = $27 RETURNING *;
         `;
         const updateValues = [
           data.first_name,
@@ -123,6 +131,13 @@ exports.handler = async (event) => {
           data.favorite,
           data.needs_review,
           data.waitlisted,
+          data.general_notes,
+          data.assessment,
+          data.objective,
+          data.plan,
+          data.waitlist_notes,
+          data.emergency_contact,
+          data.emergency_contact_phone,
           id,
         ];
         const updateRes = await clientCONNECTION.query(

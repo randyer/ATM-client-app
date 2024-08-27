@@ -381,12 +381,6 @@ function ClientInfo({ clients, setClients }) {
             isFalse={<Archived></Archived>}
           ></Toggle>
         </div>
-        <button
-          onClick={() => updateClient(editableClient.id)}
-          className="button"
-        >
-          Save
-        </button>
       </header>
       <div className="client-profile">
         <div className="client-avatar">
