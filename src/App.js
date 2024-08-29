@@ -206,10 +206,7 @@ function App() {
     (client) =>
       (client.first_name + " " + client.last_name)
         .toLowerCase()
-        .includes(search.toLowerCase()) &&
-      ((activeTab === "active" && client.active && !client.waitlisted) ||
-        (activeTab === "waitlist" && client.waitlisted) ||
-        (activeTab === "archive" && !client.active))
+        .includes(search.toLowerCase()) && client.status === activeTab
   );
 
   return (
@@ -265,6 +262,14 @@ function App() {
                               onClick={() => setActiveTab("waitlist")}
                             >
                               Waitlist
+                            </button>
+                            <button
+                              className={`tab ${
+                                activeTab === "re-book" ? "active" : ""
+                              }`}
+                              onClick={() => setActiveTab("re-book")}
+                            >
+                              Re-book
                             </button>
                             <button
                               className={`tab ${

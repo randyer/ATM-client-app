@@ -6,9 +6,10 @@ import Toggle from "./components/ToggleButton";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { del, put } from "aws-amplify/api";
 
+import { Form } from "react-bootstrap";
+// import "bootstrap/dist/css/bootstrap.min.css";
+
 // icons
-import { ReactComponent as Archived } from "./icons/inventoryFill.svg";
-import { ReactComponent as Active } from "./icons/inventory.svg";
 import { ReactComponent as Star } from "./icons/star.svg";
 import { ReactComponent as StarFill } from "./icons/startFill.svg";
 import { ReactComponent as NoReview } from "./icons/important.svg";
@@ -22,8 +23,6 @@ import { ReactComponent as Notes } from "./icons/note.svg";
 import { ReactComponent as NotesFill } from "./icons/noteFill.svg";
 import { ReactComponent as Appointment } from "./icons/calendar.svg";
 import { ReactComponent as AppointmentFill } from "./icons/calendarFill.svg";
-import { ReactComponent as Waitlist } from "./icons/hourglass.svg";
-import { ReactComponent as WaitlistFill } from "./icons/hourglassFill.svg";
 import { ReactComponent as Copy } from "./icons/contentCopy.svg";
 
 function ClientInfo({ clients, setClients }) {
@@ -99,14 +98,12 @@ function ClientInfo({ clients, setClients }) {
     setEditableClient((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleToggleActive = (newActiveValue) => {
+  const handleStatusChange = (e) => {
+    const newStatus = e.target.value;
     setEditableClient((prevState) => ({
       ...prevState,
-      active: newActiveValue,
+      status: newStatus,
     }));
-    if (editableClient.waitlisted === true && newActiveValue === false) {
-      setEditableClient((prevState) => ({ ...prevState, waitlisted: false }));
-    }
   };
 
   const handleToggleFavorite = (newFavoriteValue) => {
@@ -121,16 +118,6 @@ function ClientInfo({ clients, setClients }) {
       ...prevState,
       needs_review: newNeedsReviewValue,
     }));
-  };
-
-  const handleToggleWaitlist = (newWaitlistValue) => {
-    setEditableClient((prevState) => ({
-      ...prevState,
-      waitlisted: newWaitlistValue,
-    }));
-    if (editableClient.active === false && newWaitlistValue === true) {
-      setEditableClient((prevState) => ({ ...prevState, active: true }));
-    }
   };
 
   if (!client) {
@@ -367,18 +354,17 @@ function ClientInfo({ clients, setClients }) {
             isTrue={<NeedsReview></NeedsReview>}
             isFalse={<NoReview></NoReview>}
           ></Toggle>
-          <Toggle
-            val={editableClient.waitlisted}
-            onToggle={handleToggleWaitlist}
-            isTrue={<WaitlistFill></WaitlistFill>}
-            isFalse={<Waitlist></Waitlist>}
-          ></Toggle>
-          <Toggle
-            val={editableClient.active}
-            onToggle={handleToggleActive}
-            isTrue={<Active></Active>}
-            isFalse={<Archived></Archived>}
-          ></Toggle>
+
+          <Form.Select
+            name="status"
+            value={editableClient.status}
+            onChange={handleStatusChange}
+          >
+            <option value="active">Active</option>
+            <option value="waitlist">Waitlist</option>
+            <option value="re-book">Re-book</option>
+            <option value="archive">Archive</option>
+          </Form.Select>
         </div>
       </header>
       <div className="client-profile">
