@@ -58,11 +58,11 @@ exports.handler = async (event) => {
           INSERT INTO client (
             first_name, last_name, phone, email, dob, street, city, state, zip,
             heard_about_us, current_symptoms, past_symptoms, past_injuries, past_surgeries,
-            form_data, active, favorite, needs_review, waitlisted, general_notes, assessment,
+            form_data, status, active, favorite, needs_review, waitlisted, general_notes, assessment,
             objective, plan, waitlist_notes, emergency_contact, emergency_contact_phone
           ) VALUES (
             $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19,
-            $20, $21, $22, $23, $24, $25, $26
+            $20, $21, $22, $23, $24, $25, $26, $27
           ) RETURNING *;
         `;
         const insertValues = [
@@ -81,6 +81,7 @@ exports.handler = async (event) => {
           data.past_injuries,
           data.past_surgeries,
           data.form_data,
+          data.status,
           data.active,
           data.favorite,
           data.needs_review,
@@ -106,10 +107,10 @@ exports.handler = async (event) => {
             first_name = $1, last_name = $2, phone = $3, email = $4, dob = $5, street = $6,
             city = $7, state = $8, zip = $9, heard_about_us = $10, current_symptoms = $11,
             past_symptoms = $12, past_injuries = $13, past_surgeries = $14, form_data = $15,
-            active = $16, favorite = $17, needs_review = $18, waitlisted = $19,
-            general_notes = $20, assessment = $21, objective = $22, plan = $23,
-            waitlist_notes = $24, emergency_contact = $25, emergency_contact_phone = $26
-          WHERE id = $27 RETURNING *;
+            status = $16, active = $17, favorite = $18, needs_review = $19, waitlisted = $20,
+            general_notes = $21, assessment = $22, objective = $23, plan = $24,
+            waitlist_notes = $25, emergency_contact = $26, emergency_contact_phone = $27
+          WHERE id = $28 RETURNING *;
         `;
         const updateValues = [
           data.first_name,
@@ -127,6 +128,7 @@ exports.handler = async (event) => {
           data.past_injuries,
           data.past_surgeries,
           data.form_data,
+          data.status,
           data.active,
           data.favorite,
           data.needs_review,
