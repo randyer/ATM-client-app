@@ -7,35 +7,6 @@ import { ReactComponent as NeedsReview } from "../icons/importantFill.svg";
 import { ReactComponent as StarFill } from "../icons/startFill.svg";
 
 const ClientList = ({ clients, getInitials, waitlist, setClients }) => {
-  const saveClientData = async (id, updatedData) => {
-    try {
-      // Update the client in the local state
-      setClients((prevClients) =>
-        prevClients.map((client) =>
-          client.id === id ? { ...client, ...updatedData } : client
-        )
-      );
-
-      // Make a PUT request to update the client in the database
-      const restOperation = await put({
-        apiName: "apiclient",
-        path: `/client/${id}`,
-        options: {
-          body: updatedData,
-        },
-      });
-
-      const { body } = await restOperation.response;
-      const response = await body.json();
-
-      if (response) {
-        console.log("Client data successfully updated:", response);
-      }
-    } catch (error) {
-      console.error("Error updating client data:", error);
-    }
-  };
-
   return (
     <ul className="client-list">
       {clients
