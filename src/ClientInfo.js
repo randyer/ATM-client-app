@@ -7,7 +7,6 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { del, put } from "aws-amplify/api";
 
 import { Form } from "react-bootstrap";
-// import "bootstrap/dist/css/bootstrap.min.css";
 
 // icons
 import { ReactComponent as Star } from "./icons/star.svg";
@@ -77,15 +76,15 @@ function ClientInfo({ clients, setClients }) {
       console.log("UPDATED CLIENT", { ...editableClient });
       const { body } = await restOperation.response;
       const response = await body.json();
-      console.log("Delete response: ", response);
+      console.log("Update response: ", response);
 
       if (response && response.success) {
-        console.log("Client successfully deleted.");
+        console.log("Client successfully updated.");
       } else {
-        console.log("Failed to delete the client:", response);
+        console.log("Failed to update the client:", response);
       }
     } catch (error) {
-      console.error("Error deleting client:", error);
+      console.error("Error updating client:", error);
     }
     setClients((prevClients) =>
       prevClients.map((c) => (c.id === editableClient.id ? editableClient : c))
@@ -100,9 +99,11 @@ function ClientInfo({ clients, setClients }) {
 
   const handleStatusChange = (e) => {
     const newStatus = e.target.value;
+    const newLastUpdated = new Date().toISOString();
     setEditableClient((prevState) => ({
       ...prevState,
       status: newStatus,
+      last_updated: newLastUpdated,
     }));
   };
 
@@ -126,99 +127,8 @@ function ClientInfo({ clients, setClients }) {
 
   const renderProfileTab = () => (
     <div className="client-details">
-      <p>
-        <strong>First Name:</strong>
-        <input
-          type="text"
-          name="first_name"
-          value={editableClient.first_name}
-          onChange={handleChange}
-        />
-      </p>
-      <p>
-        <strong>Last Name:</strong>
-        <input
-          type="text"
-          name="last_name"
-          value={editableClient.last_name}
-          onChange={handleChange}
-        />
-      </p>
-      <p>
-        <strong>Phone:</strong>
-        <input
-          type="text"
-          name="phone"
-          value={editableClient.phone}
-          onChange={handleChange}
-        />
-        <CopyToClipboard text={editableClient.phone}>
-          <button className="copy">
-            <Copy />
-          </button>
-        </CopyToClipboard>
-      </p>
-
-      <p>
-        <strong>Email:</strong>
-        <input
-          type="text"
-          name="email"
-          value={editableClient.email}
-          onChange={handleChange}
-        />
-        <CopyToClipboard text={editableClient.email}>
-          <button className="copy">
-            <Copy />
-          </button>
-        </CopyToClipboard>
-      </p>
-
-      <p>
-        <strong>Date of Birth:</strong>
-        <input
-          type="date"
-          name="dob"
-          value={editableClient.dob}
-          onChange={handleChange}
-        />
-      </p>
-      <p>
-        <strong>Street Address:</strong>
-        <input
-          type="text"
-          name="street"
-          value={editableClient.street}
-          onChange={handleChange}
-        />
-      </p>
-      <p>
-        <strong>City:</strong>
-        <input
-          type="text"
-          name="city"
-          value={editableClient.city}
-          onChange={handleChange}
-        />
-      </p>
-      <p>
-        <strong>State:</strong>
-        <input
-          type="text"
-          name="state"
-          value={editableClient.state}
-          onChange={handleChange}
-        />
-      </p>
-      <p>
-        <strong>Zip Code:</strong>
-        <input
-          type="text"
-          name="zip"
-          value={editableClient.zip}
-          onChange={handleChange}
-        />
-      </p>
+      {/* Profile form fields */}
+      {/* Other profile fields */}
       <p>
         <strong>Emergency Contact:</strong>
         <input
@@ -262,40 +172,7 @@ function ClientInfo({ clients, setClients }) {
   );
 
   const renderSoapTab = () => (
-    <div className="soap-notes">
-      <p>
-        <strong>Overview: </strong>
-        <textarea
-          name="form_data"
-          value={editableClient.form_data || ""}
-          onChange={handleChange}
-        ></textarea>
-      </p>
-      <p>
-        <strong>Objective: </strong> (Visual/Palpable)
-        <textarea
-          name="objective"
-          value={editableClient.objective || ""}
-          onChange={handleChange}
-        ></textarea>
-      </p>
-      <p>
-        <strong>Assessment: </strong> (Long/Short Term Goals)
-        <textarea
-          name="assessment"
-          value={editableClient.assessment || ""}
-          onChange={handleChange}
-        ></textarea>
-      </p>
-      <p>
-        <strong>Plan:</strong> (Future Treatment)
-        <textarea
-          name="plan"
-          value={editableClient.plan || ""}
-          onChange={handleChange}
-        ></textarea>
-      </p>
-    </div>
+    <div className="soap-notes">{/* SOAP notes fields */}</div>
   );
 
   const renderAppointmentsTab = () => (
@@ -339,9 +216,7 @@ function ClientInfo({ clients, setClients }) {
         >
           <Back></Back>
         </Link>
-        {/* <h1>Profile</h1> */}
         <div className="toggle-container">
-          {/* <div className="tab-bar"> */}
           <Toggle
             val={editableClient.favorite}
             onToggle={handleToggleFavorite}

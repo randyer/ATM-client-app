@@ -13,9 +13,12 @@ import "./css/variables.css";
 import { ReactComponent as AddButton } from "./icons/add.svg";
 import { ReactComponent as SignOut } from "./icons/logout.svg";
 import { ReactComponent as Refresh } from "./icons/refresh.svg";
+import { ReactComponent as Sort } from "./icons/sort.svg";
 
 import { Authenticator, withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
+import { Button, Dropdown } from "react-bootstrap";
+import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
 function App() {
   const [clients, setClients] = useState([]);
@@ -287,6 +290,33 @@ function App() {
                             onChange={(e) => setSearch(e.target.value)}
                             className="search-bar"
                           />
+                          {/* <Sort className="svg-icon"></Sort> */}
+                          <Dropdown>
+                            <Dropdown.Toggle
+                              variant="success"
+                              id="dropdown-basic"
+                            >
+                              <Sort className="svg-icon" /> Sort
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                              <Dropdown.Item
+                              // onClick={() => setSortMethod("lastUpdated")}
+                              >
+                                Last Updated
+                              </Dropdown.Item>
+                              <Dropdown.Item
+                              // onClick={() => setSortMethod("firstUpdated")}
+                              >
+                                First Updated
+                              </Dropdown.Item>
+                              <Dropdown.Item
+                              // onClick={() => setSortMethod("alphabetical")}
+                              >
+                                By Name
+                              </Dropdown.Item>
+                            </Dropdown.Menu>
+                          </Dropdown>
                         </div>
                         <ClientList
                           clients={filteredClients}
