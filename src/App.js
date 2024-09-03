@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ClientInfo from "./ClientInfo";
-import { get, post } from "aws-amplify/api";
+import { post } from "aws-amplify/api";
+import { fetchClients } from "./helper/ClientApi";
 
 // components
 import ClientList from "./components/ClientList";
@@ -27,40 +28,8 @@ function App() {
   const [refreshClicked, setRefreshClicked] = useState(false);
   const [sortMethod, setSortMethod] = useState("lastUpdated");
 
-  async function fetchClients() {
-    try {
-      // Add the Authorization header to the request
-      const restOperation = await get({
-        apiName: "apiclient",
-        path: "/clients",
-      });
-
-      const { body } = await restOperation.response;
-      const response = await body.json();
-      console.log("response: ", response);
-
-      if (Array.isArray(response)) {
-        console.log("Updating clients state with response data.");
-
-        // Reformat the dob field to 'yyyy-mm-dd' format
-        const formattedClients = response.map((client) => {
-          if (client.dob) {
-            client.dob = new Date(client.dob).toISOString().split("T")[0];
-          }
-          return client;
-        });
-
-        setClients(formattedClients);
-      } else {
-        console.log("Response is not an array:", response);
-      }
-    } catch (error) {
-      console.error("Error fetching clients:", error);
-    }
-  }
-
   useEffect(() => {
-    fetchClients();
+    fetchClients(setClients);
   }, []);
 
   useEffect(() => {
@@ -138,7 +107,7 @@ function App() {
         const response = await body.json();
 
         if (response) {
-          fetchClients();
+          fetchClients(setClients);
         }
       } catch (error) {
         console.error("Error adding or fetching clients:", error);
@@ -233,7 +202,7 @@ function App() {
                             <button
                               onClick={() => {
                                 setRefreshClicked(true);
-                                fetchClients();
+                                fetchClients(setClients);
                                 setTimeout(() => setRefreshClicked(false), 300); // Reset after 300ms
                               }}
                               className={refreshClicked ? "button-clicked" : ""}
