@@ -60,7 +60,7 @@ function ClientInfo({ clients, setClients }) {
       prevClients.filter((client) => client.id !== clientId)
     );
 
-    // Optionally, navigate back to the client list after deletion
+    // Navigate back to the client list after deletion
     navigate("/");
   }
 

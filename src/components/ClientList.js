@@ -27,7 +27,6 @@ const ClientList = ({ clients, getInitials }) => {
 
   return (
     <div>
-      <div className="sort-options"></div>
       <ul className="client-list">
         {sortClients(clients).map((client) => (
           <li key={client.id} className="client-item">

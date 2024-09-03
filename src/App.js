@@ -227,7 +227,8 @@ function App() {
                     path="/"
                     element={
                       <>
-                        <div className="fixed">
+                        <div className="sticky">
+                          {/* <div> */}
                           <header className="App-header">
                             <button
                               onClick={() => {
@@ -327,7 +328,7 @@ function App() {
                           getInitials={getInitials}
                           waitlist={activeTab === "waitlist"}
                           setClients={setClients}
-                          sortMethod={sortMethod} // Pass sortMethod to ClientList
+                          sortMethod={sortMethod}
                         />
                       </>
                     }
