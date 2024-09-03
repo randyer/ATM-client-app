@@ -4,6 +4,10 @@ button {
   all: unset;
 }
 
+h1 {
+  margin-block: 1rem !important;
+}
+
 .App {
   text-align: center;
   font-family: Arial, sans-serif;
@@ -71,6 +75,8 @@ button {
 .client-list {
   position: relative;
   list-style-type: none;
+  max-height: calc(100vh - 200px);
+  /* 207.42 */
   padding: 0;
   top: 197.88px;
   overflow-y: auto;
@@ -145,4 +151,21 @@ button {
 .button-clicked {
   background-color: #f0f0f0; /* Change to a light color */
   transition: background-color 0.3s ease;
+}
+
+.search-and-sort {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  gap: 10px; /* Adjust the gap between the search bar and dropdown */
+}
+
+.sort-dropdown {
+  margin-left: auto; /* Pushes the dropdown to the right if desired */
+  background-color: var(--purple) !important;
+  border-color: var(--purple) !important;
+}
+
+.search-bar {
+  flex: 1; /* Makes the search bar take up available space */
 }
