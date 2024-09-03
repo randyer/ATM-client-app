@@ -3,11 +3,10 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import "./css/ClientInfo.css";
 import "./css/variables.css";
 import "./css/App.css";
+import { Dropdown } from "react-bootstrap";
 import Toggle from "./components/ToggleButton";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { del, put } from "aws-amplify/api";
-
-import { Dropdown } from "react-bootstrap";
 
 // icons
 import { ReactComponent as Star } from "./icons/star.svg";
