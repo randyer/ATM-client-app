@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./css/ClientInfo.css";
 import "./css/variables.css";
+import "./css/App.css";
 import Toggle from "./components/ToggleButton";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { del, put } from "aws-amplify/api";
 
-import { Form } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 
 // icons
 import { ReactComponent as Star } from "./icons/star.svg";
@@ -354,16 +355,51 @@ function ClientInfo({ clients, setClients }) {
             isFalse={<NoReview></NoReview>}
           ></Toggle>
 
-          <Form.Select
-            name="status"
-            value={editableClient.status}
-            onChange={handleStatusChange}
-          >
-            <option value="active">Active</option>
-            <option value="waitlist">Waitlist</option>
-            <option value="re-book">Re-book</option>
-            <option value="archive">Archive</option>
-          </Form.Select>
+          <Dropdown>
+            <Dropdown.Toggle id="dropdown-status" className="dropdown-button">
+              {editableClient.status.charAt(0).toUpperCase() +
+                editableClient.status.slice(1)}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item
+                onClick={() =>
+                  handleStatusChange({
+                    target: { name: "status", value: "active" },
+                  })
+                }
+              >
+                Active
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() =>
+                  handleStatusChange({
+                    target: { name: "status", value: "waitlist" },
+                  })
+                }
+              >
+                Waitlist
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() =>
+                  handleStatusChange({
+                    target: { name: "status", value: "re-book" },
+                  })
+                }
+              >
+                Re-book
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() =>
+                  handleStatusChange({
+                    target: { name: "status", value: "archive" },
+                  })
+                }
+              >
+                Archive
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </header>
       <div className="client-profile">

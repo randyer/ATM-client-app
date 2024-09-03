@@ -146,10 +146,10 @@ h1 {
   gap: 10px;
 }
 
-.sort-dropdown {
-  margin-left: auto; /* Pushes the dropdown to the right if desired */
+.dropdown-button {
   background-color: var(--purple) !important;
   border-color: var(--purple) !important;
+  border-radius: 5px;
 }
 
 .search-bar {

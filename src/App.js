@@ -298,7 +298,7 @@ function App() {
                               <Dropdown.Toggle
                                 // variant="success"
                                 id="dropdown-basic"
-                                className="sort-dropdown"
+                                className="dropdown-button"
                               >
                                 <Sort className="svg-icon" />
                               </Dropdown.Toggle>
