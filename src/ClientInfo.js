@@ -7,6 +7,7 @@ import { Dropdown } from "react-bootstrap";
 import Toggle from "./components/ToggleButton";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { del, put } from "aws-amplify/api";
+import { Autosave, useAutosave } from "react-autosave";
 
 // icons
 import { ReactComponent as Star } from "./icons/star.svg";
@@ -31,6 +32,11 @@ function ClientInfo({ clients, setClients }) {
 
   const [editableClient, setEditableClient] = useState({ ...client });
   const [activeTab, setActiveTab] = useState("notes");
+  useAutosave({
+    data: editableClient,
+    onSave: updateClient,
+    interval: 10000,
+  });
 
   useEffect(() => {
     console.log("Clients state updated from client info page:", editableClient);
@@ -64,11 +70,11 @@ function ClientInfo({ clients, setClients }) {
     navigate("/");
   }
 
-  async function updateClient(clientId) {
+  async function updateClient(editableClient) {
     try {
       const restOperation = await put({
         apiName: "apiclient",
-        path: `/client/${clientId}`,
+        path: `/client/${editableClient.id}`,
         options: {
           body: { ...editableClient },
         },
@@ -89,7 +95,6 @@ function ClientInfo({ clients, setClients }) {
     setClients((prevClients) =>
       prevClients.map((c) => (c.id === editableClient.id ? editableClient : c))
     );
-    navigate("/");
   }
 
   const handleChange = (e) => {
@@ -334,7 +339,7 @@ function ClientInfo({ clients, setClients }) {
     <div className="client-info-page">
       <header className="client-info-header">
         <Link
-          onClick={() => updateClient(editableClient.id)}
+          onClick={() => updateClient(editableClient)}
           to="/"
           className="back-button"
         >
@@ -367,6 +372,7 @@ function ClientInfo({ clients, setClients }) {
                     target: { name: "status", value: "active" },
                   })
                 }
+                className={editableClient.status === "active" ? "selected" : ""}
               >
                 Active
               </Dropdown.Item>
@@ -375,6 +381,9 @@ function ClientInfo({ clients, setClients }) {
                   handleStatusChange({
                     target: { name: "status", value: "waitlist" },
                   })
+                }
+                className={
+                  editableClient.status === "waitlist" ? "selected" : ""
                 }
               >
                 Waitlist
@@ -385,6 +394,9 @@ function ClientInfo({ clients, setClients }) {
                     target: { name: "status", value: "re-book" },
                   })
                 }
+                className={
+                  editableClient.status === "re-book" ? "selected" : ""
+                }
               >
                 Re-book
               </Dropdown.Item>
@@ -393,6 +405,9 @@ function ClientInfo({ clients, setClients }) {
                   handleStatusChange({
                     target: { name: "status", value: "archive" },
                   })
+                }
+                className={
+                  editableClient.status === "archive" ? "selected" : ""
                 }
               >
                 Archive
