@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./css/ClientInfo.css";
 import "./css/variables.css";
+import "./css/App.css";
+import { Dropdown } from "react-bootstrap";
 import Toggle from "./components/ToggleButton";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { del, put } from "aws-amplify/api";
-
-import { Form } from "react-bootstrap";
-// import "bootstrap/dist/css/bootstrap.min.css";
 
 // icons
 import { ReactComponent as Star } from "./icons/star.svg";
@@ -61,7 +60,7 @@ function ClientInfo({ clients, setClients }) {
       prevClients.filter((client) => client.id !== clientId)
     );
 
-    // Optionally, navigate back to the client list after deletion
+    // Navigate back to the client list after deletion
     navigate("/");
   }
 
@@ -77,15 +76,15 @@ function ClientInfo({ clients, setClients }) {
       console.log("UPDATED CLIENT", { ...editableClient });
       const { body } = await restOperation.response;
       const response = await body.json();
-      console.log("Delete response: ", response);
+      console.log("Update response: ", response);
 
       if (response && response.success) {
-        console.log("Client successfully deleted.");
+        console.log("Client successfully updated.");
       } else {
-        console.log("Failed to delete the client:", response);
+        console.log("Failed to update the client:", response);
       }
     } catch (error) {
-      console.error("Error deleting client:", error);
+      console.error("Error updating client:", error);
     }
     setClients((prevClients) =>
       prevClients.map((c) => (c.id === editableClient.id ? editableClient : c))
@@ -100,9 +99,11 @@ function ClientInfo({ clients, setClients }) {
 
   const handleStatusChange = (e) => {
     const newStatus = e.target.value;
+    const newLastUpdated = new Date().toISOString();
     setEditableClient((prevState) => ({
       ...prevState,
       status: newStatus,
+      last_updated: newLastUpdated,
     }));
   };
 
@@ -339,9 +340,7 @@ function ClientInfo({ clients, setClients }) {
         >
           <Back></Back>
         </Link>
-        {/* <h1>Profile</h1> */}
         <div className="toggle-container">
-          {/* <div className="tab-bar"> */}
           <Toggle
             val={editableClient.favorite}
             onToggle={handleToggleFavorite}
@@ -355,16 +354,51 @@ function ClientInfo({ clients, setClients }) {
             isFalse={<NoReview></NoReview>}
           ></Toggle>
 
-          <Form.Select
-            name="status"
-            value={editableClient.status}
-            onChange={handleStatusChange}
-          >
-            <option value="active">Active</option>
-            <option value="waitlist">Waitlist</option>
-            <option value="re-book">Re-book</option>
-            <option value="archive">Archive</option>
-          </Form.Select>
+          <Dropdown>
+            <Dropdown.Toggle id="dropdown-status" className="dropdown-button">
+              {editableClient.status.charAt(0).toUpperCase() +
+                editableClient.status.slice(1)}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item
+                onClick={() =>
+                  handleStatusChange({
+                    target: { name: "status", value: "active" },
+                  })
+                }
+              >
+                Active
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() =>
+                  handleStatusChange({
+                    target: { name: "status", value: "waitlist" },
+                  })
+                }
+              >
+                Waitlist
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() =>
+                  handleStatusChange({
+                    target: { name: "status", value: "re-book" },
+                  })
+                }
+              >
+                Re-book
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() =>
+                  handleStatusChange({
+                    target: { name: "status", value: "archive" },
+                  })
+                }
+              >
+                Archive
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </header>
       <div className="client-profile">

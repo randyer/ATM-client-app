@@ -1,50 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { put } from "aws-amplify/api";
 
 // svgs
 import { ReactComponent as NeedsReview } from "../icons/importantFill.svg";
 import { ReactComponent as StarFill } from "../icons/startFill.svg";
 
-const ClientList = ({ clients, getInitials, waitlist, setClients }) => {
-  const saveClientData = async (id, updatedData) => {
-    try {
-      // Update the client in the local state
-      setClients((prevClients) =>
-        prevClients.map((client) =>
-          client.id === id ? { ...client, ...updatedData } : client
-        )
-      );
-
-      // Make a PUT request to update the client in the database
-      const restOperation = await put({
-        apiName: "apiclient",
-        path: `/client/${id}`,
-        options: {
-          body: updatedData,
-        },
-      });
-
-      const { body } = await restOperation.response;
-      const response = await body.json();
-
-      if (response) {
-        console.log("Client data successfully updated:", response);
-      }
-    } catch (error) {
-      console.error("Error updating client data:", error);
+const ClientList = ({ clients, getInitials, sortMethod, setSortMethod }) => {
+  const sortClients = (clients) => {
+    switch (sortMethod) {
+      case "alphabetical":
+        return clients.sort((a, b) =>
+          `${a.first_name} ${a.last_name}`.localeCompare(
+            `${b.first_name} ${b.last_name}`
+          )
+        );
+      case "queue":
+        return clients.sort(
+          (a, b) => new Date(a.last_updated) - new Date(b.last_updated)
+        );
+      case "recentlyModified":
+        return clients.sort(
+          (a, b) => new Date(b.last_updated) - new Date(a.last_updated)
+        );
+      default:
+        return clients;
     }
   };
 
   return (
-    <ul className="client-list">
-      {clients
-        .sort((a, b) =>
-          `${a.first_name} ${a.last_name}`.localeCompare(
-            `${b.first_name} ${b.last_name}`
-          )
-        )
-        .map((client) => (
+    <div>
+      <ul className="client-list">
+        {sortClients(clients).map((client) => (
           <li key={client.id} className="client-item">
             <Link to={`/client/${client.id}`} className="client-link">
               <div className="client-info-container">
@@ -79,7 +65,8 @@ const ClientList = ({ clients, getInitials, waitlist, setClients }) => {
             </Link>
           </li>
         ))}
-    </ul>
+      </ul>
+    </div>
   );
 };
 

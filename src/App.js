@@ -1,123 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ClientInfo from "./ClientInfo";
-import { get, post } from "aws-amplify/api";
+import { post } from "aws-amplify/api";
+import { fetchClients } from "./helper/ClientApi";
 
-//components
+// components
 import ClientList from "./components/ClientList";
 import ScrollToTop from "./components/ScrollToTop";
-//css
-import "./css/App.css";
+
+// css
+import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import "./css/variables.css";
+import "./css/App.css";
+
 // svgs
 import { ReactComponent as AddButton } from "./icons/add.svg";
 import { ReactComponent as SignOut } from "./icons/logout.svg";
 import { ReactComponent as Refresh } from "./icons/refresh.svg";
+import { ReactComponent as Sort } from "./icons/sort.svg";
 
 import { Authenticator, withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
+import { Button, Dropdown } from "react-bootstrap";
 
 function App() {
   const [clients, setClients] = useState([]);
   const [refreshClicked, setRefreshClicked] = useState(false);
-
-  async function fetchClients() {
-    try {
-      // Add the Authorization header to the request
-      const restOperation = await get({
-        apiName: "apiclient",
-        path: "/clients",
-      });
-
-      const { body } = await restOperation.response;
-      const response = await body.json();
-      console.log("response: ", response);
-
-      if (Array.isArray(response)) {
-        console.log("Updating clients state with response data.");
-
-        // Reformat the dob field to 'yyyy-mm-dd' format
-        const formattedClients = response.map((client) => {
-          if (client.dob) {
-            client.dob = new Date(client.dob).toISOString().split("T")[0];
-          }
-          return client;
-        });
-
-        setClients(formattedClients);
-      } else {
-        console.log("Response is not an array:", response);
-      }
-    } catch (error) {
-      console.error("Error fetching clients:", error);
-    }
-  }
+  const [sortMethod, setSortMethod] = useState("alphabetical");
 
   useEffect(() => {
-    fetchClients();
+    fetchClients(setClients);
   }, []);
 
-  // Log the clients state to see if it updates
   useEffect(() => {
     console.log("Clients state updated:", clients);
   }, [clients]);
-
-  // let clientTesting = [
-  //   {
-  //     id: 1,
-  //     firstName: "Anna",
-  //     lastName: "Haro",
-  //     phone: "555-522-8243",
-  //     email: "anna-haro@mac.com",
-  //     dob: "1980-01-01",
-  //     address: {
-  //       street: "123 Apple St",
-  //       city: "Cupertino",
-  //       state: "CA",
-  //       zip: "95014",
-  //     },
-  //     emergencyContact: "John Haro",
-  //     emergencyContactPhone: "555-123-4567",
-  //     heardAboutUs: "Google",
-  //     currentSymptoms: "Headache",
-  //     pastSymptoms: "Back pain",
-  //     pastInjuries: "Broken leg",
-  //     pastSurgeries: "Appendectomy",
-  //     formData:
-  //       "Current Symptoms: Headache\nPast Symptoms: Back pain\nPast Injuries: Broken leg\nPast Surgeries: Appendectomy",
-  //     active: true,
-  //     favorite: true,
-  //     needsReview: false,
-  //     waitlisted: false,
-  //   },
-  //   {
-  //     id: 2,
-  //     firstName: "Daniel",
-  //     lastName: "Higgins Jr.",
-  //     phone: "555-478-7672",
-  //     email: "d-higgins@mac.com",
-  //     dob: "1985-02-15",
-  //     address: {
-  //       street: "456 Banana Blvd",
-  //       city: "Cupertino",
-  //       state: "CA",
-  //       zip: "95014",
-  //     },
-  //     emergencyContact: "Jane Higgins",
-  //     emergencyContactPhone: "555-234-5678",
-  //     heardAboutUs: "Facebook",
-  //     currentSymptoms: "Neck pain",
-  //     pastSymptoms: "Shoulder pain",
-  //     pastInjuries: "Sprained ankle",
-  //     pastSurgeries: "Knee surgery",
-  //     formData:
-  //       "Current Symptoms: Neck pain\nPast Symptoms: Shoulder pain\nPast Injuries: Sprained ankle\nPast Surgeries: Knee surgery",
-  //     active: true,
-  //     favorite: false,
-  //     needsReview: false,
-  //     waitlisted: false,
-  //   },
-  // ];
 
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState("active");
@@ -190,7 +107,7 @@ function App() {
         const response = await body.json();
 
         if (response) {
-          fetchClients();
+          fetchClients(setClients);
         }
       } catch (error) {
         console.error("Error adding or fetching clients:", error);
@@ -209,6 +126,63 @@ function App() {
         .includes(search.toLowerCase()) && client.status === activeTab
   );
 
+  // let clientTesting = [
+  //   {
+  //     id: 1,
+  //     firstName: "Anna",
+  //     lastName: "Haro",
+  //     phone: "555-522-8243",
+  //     email: "anna-haro@mac.com",
+  //     dob: "1980-01-01",
+  //     address: {
+  //       street: "123 Apple St",
+  //       city: "Cupertino",
+  //       state: "CA",
+  //       zip: "95014",
+  //     },
+  //     emergencyContact: "John Haro",
+  //     emergencyContactPhone: "555-123-4567",
+  //     heardAboutUs: "Google",
+  //     currentSymptoms: "Headache",
+  //     pastSymptoms: "Back pain",
+  //     pastInjuries: "Broken leg",
+  //     pastSurgeries: "Appendectomy",
+  //     formData:
+  //       "Current Symptoms: Headache\nPast Symptoms: Back pain\nPast Injuries: Broken leg\nPast Surgeries: Appendectomy",
+  //     active: true,
+  //     favorite: true,
+  //     needsReview: false,
+  //     waitlisted: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     firstName: "Daniel",
+  //     lastName: "Higgins Jr.",
+  //     phone: "555-478-7672",
+  //     email: "d-higgins@mac.com",
+  //     dob: "1985-02-15",
+  //     address: {
+  //       street: "456 Banana Blvd",
+  //       city: "Cupertino",
+  //       state: "CA",
+  //       zip: "95014",
+  //     },
+  //     emergencyContact: "Jane Higgins",
+  //     emergencyContactPhone: "555-234-5678",
+  //     heardAboutUs: "Facebook",
+  //     currentSymptoms: "Neck pain",
+  //     pastSymptoms: "Shoulder pain",
+  //     pastInjuries: "Sprained ankle",
+  //     pastSurgeries: "Knee surgery",
+  //     formData:
+  //       "Current Symptoms: Neck pain\nPast Symptoms: Shoulder pain\nPast Injuries: Sprained ankle\nPast Surgeries: Knee surgery",
+  //     active: true,
+  //     favorite: false,
+  //     needsReview: false,
+  //     waitlisted: false,
+  //   },
+  // ];
+
   return (
     <div className="App">
       <Authenticator hideSignUp={true}>
@@ -222,12 +196,13 @@ function App() {
                     path="/"
                     element={
                       <>
-                        <div className="fixed">
+                        <div className="sticky">
+                          {/* <div> */}
                           <header className="App-header">
                             <button
                               onClick={() => {
                                 setRefreshClicked(true);
-                                fetchClients();
+                                fetchClients(setClients);
                                 setTimeout(() => setRefreshClicked(false), 300); // Reset after 300ms
                               }}
                               className={refreshClicked ? "button-clicked" : ""}
@@ -280,19 +255,52 @@ function App() {
                               Archive
                             </button>
                           </div>
-                          <input
-                            type="text"
-                            placeholder="Search"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="search-bar"
-                          />
+                          <div className="search-and-sort">
+                            <input
+                              type="text"
+                              placeholder="Search"
+                              value={search}
+                              onChange={(e) => setSearch(e.target.value)}
+                              className="search-bar"
+                            />
+                            <Dropdown>
+                              <Dropdown.Toggle
+                                // variant="success"
+                                id="dropdown-basic"
+                                className="dropdown-button"
+                              >
+                                <Sort className="svg-icon" />
+                              </Dropdown.Toggle>
+
+                              <Dropdown.Menu>
+                                <Dropdown.Item
+                                  onClick={() => setSortMethod("alphabetical")}
+                                >
+                                  By Name
+                                </Dropdown.Item>
+                                <Dropdown.Item
+                                  onClick={() => setSortMethod("queue")}
+                                >
+                                  Queue
+                                </Dropdown.Item>
+                                <Dropdown.Item
+                                  onClick={() =>
+                                    setSortMethod("recentlyModified")
+                                  }
+                                >
+                                  Recently modified
+                                </Dropdown.Item>
+                              </Dropdown.Menu>
+                            </Dropdown>
+                          </div>
                         </div>
                         <ClientList
                           clients={filteredClients}
                           getInitials={getInitials}
                           waitlist={activeTab === "waitlist"}
                           setClients={setClients}
+                          sortMethod={sortMethod}
+                          setSortMethod={setSortMethod}
                         />
                       </>
                     }
@@ -306,7 +314,6 @@ function App() {
                 </Routes>
               </div>
             </Router>
-            <header className="App-header"></header>
           </main>
         )}
       </Authenticator>

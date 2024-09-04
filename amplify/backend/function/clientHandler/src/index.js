@@ -79,7 +79,8 @@ exports.handler = async (event) => {
               plan = $21,
               favorite = $22,
               needs_review = $23,
-              status = $24
+              status = $24,
+              last_updated = $25
           ) RETURNING *;
         `;
         const insertValues = [
@@ -107,6 +108,7 @@ exports.handler = async (event) => {
           data.favorite,
           data.needs_review,
           data.status,
+          data.last_updated,
         ];
         const insertRes = await clientCONNECTION.query(
           insertQuery,
@@ -141,8 +143,9 @@ exports.handler = async (event) => {
               plan = $21,
               favorite = $22,
               needs_review = $23,
-              status = $24
-          WHERE id = $25 RETURNING *;
+              status = $24,
+              last_updated = $25
+          WHERE id = $26 RETURNING *;
         `;
         const updateValues = [
           data.first_name,
@@ -169,6 +172,7 @@ exports.handler = async (event) => {
           data.favorite,
           data.needs_review,
           data.status,
+          data.last_updated,
           id,
         ];
         const updateRes = await clientCONNECTION.query(

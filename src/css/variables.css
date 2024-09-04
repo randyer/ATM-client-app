@@ -7,13 +7,22 @@
   --purple: #bb86fc;
   --hover-bg: #333333;
   --input-bg: #1e1e1e;
-  
 }
 
 .fixed {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  background-color: var(--background); /* Adjust background color as needed */
+  z-index: 1000; /* Ensure it stays above other elements */
+  /* padding: 1rem; */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
   width: 100%;
   background-color: var(--background); /* Adjust background color as needed */
   z-index: 1000; /* Ensure it stays above other elements */
