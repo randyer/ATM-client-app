@@ -17,7 +17,9 @@ import "./css/App.css";
 import { ReactComponent as AddButton } from "./icons/add.svg";
 import { ReactComponent as SignOut } from "./icons/logout.svg";
 import { ReactComponent as Refresh } from "./icons/refresh.svg";
-import { ReactComponent as Sort } from "./icons/sort.svg";
+import { ReactComponent as SortAlpha } from "./icons/sortAlpha.svg";
+import { ReactComponent as Upcoming } from "./icons/upcoming.svg";
+import { ReactComponent as Modified } from "./icons/history.svg";
 
 import { Authenticator, withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
@@ -268,7 +270,15 @@ function App() {
                                 id="dropdown-basic"
                                 className="dropdown-button"
                               >
-                                <Sort className="svg-icon" />
+                                {sortMethod === "alphabetical" && (
+                                  <SortAlpha className="svg-icon" />
+                                )}
+                                {sortMethod === "queue" && (
+                                  <Upcoming className="svg-icon" />
+                                )}
+                                {sortMethod === "recentlyModified" && (
+                                  <Modified className="svg-icon" />
+                                )}
                               </Dropdown.Toggle>
 
                               <Dropdown.Menu>
