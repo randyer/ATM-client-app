@@ -265,7 +265,6 @@ function App() {
                             />
                             <Dropdown>
                               <Dropdown.Toggle
-                                // variant="success"
                                 id="dropdown-basic"
                                 className="dropdown-button"
                               >
@@ -275,17 +274,30 @@ function App() {
                               <Dropdown.Menu>
                                 <Dropdown.Item
                                   onClick={() => setSortMethod("alphabetical")}
+                                  className={
+                                    sortMethod === "alphabetical"
+                                      ? "selected"
+                                      : ""
+                                  }
                                 >
                                   By Name
                                 </Dropdown.Item>
                                 <Dropdown.Item
                                   onClick={() => setSortMethod("queue")}
+                                  className={
+                                    sortMethod === "queue" ? "selected" : ""
+                                  }
                                 >
                                   Queue
                                 </Dropdown.Item>
                                 <Dropdown.Item
                                   onClick={() =>
                                     setSortMethod("recentlyModified")
+                                  }
+                                  className={
+                                    sortMethod === "recentlyModified"
+                                      ? "selected"
+                                      : ""
                                   }
                                 >
                                   Recently modified

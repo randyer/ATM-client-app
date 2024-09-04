@@ -152,6 +152,11 @@ h1 {
   border-radius: 5px;
 }
 
+.dropdown-item.selected {
+  color: var(--purple);
+  text-decoration: underline;
+}
+
 .search-bar {
   flex: 1;
 }
