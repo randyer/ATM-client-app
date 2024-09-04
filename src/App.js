@@ -26,7 +26,7 @@ import { Button, Dropdown } from "react-bootstrap";
 function App() {
   const [clients, setClients] = useState([]);
   const [refreshClicked, setRefreshClicked] = useState(false);
-  const [sortMethod, setSortMethod] = useState("lastUpdated");
+  const [sortMethod, setSortMethod] = useState("alphabetical");
 
   useEffect(() => {
     fetchClients(setClients);
@@ -274,19 +274,21 @@ function App() {
 
                               <Dropdown.Menu>
                                 <Dropdown.Item
-                                  onClick={() => setSortMethod("lastUpdated")}
-                                >
-                                  Last Updated
-                                </Dropdown.Item>
-                                <Dropdown.Item
-                                  onClick={() => setSortMethod("firstUpdated")}
-                                >
-                                  First Updated
-                                </Dropdown.Item>
-                                <Dropdown.Item
                                   onClick={() => setSortMethod("alphabetical")}
                                 >
                                   By Name
+                                </Dropdown.Item>
+                                <Dropdown.Item
+                                  onClick={() => setSortMethod("queue")}
+                                >
+                                  Queue
+                                </Dropdown.Item>
+                                <Dropdown.Item
+                                  onClick={() =>
+                                    setSortMethod("recentlyModified")
+                                  }
+                                >
+                                  Recently modified
                                 </Dropdown.Item>
                               </Dropdown.Menu>
                             </Dropdown>
@@ -298,6 +300,7 @@ function App() {
                           waitlist={activeTab === "waitlist"}
                           setClients={setClients}
                           sortMethod={sortMethod}
+                          setSortMethod={setSortMethod}
                         />
                       </>
                     }

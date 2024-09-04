@@ -5,9 +5,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as NeedsReview } from "../icons/importantFill.svg";
 import { ReactComponent as StarFill } from "../icons/startFill.svg";
 
-const ClientList = ({ clients, getInitials }) => {
-  const [sortMethod, setSortMethod] = useState("lastUpdated");
-
+const ClientList = ({ clients, getInitials, sortMethod, setSortMethod }) => {
   const sortClients = (clients) => {
     switch (sortMethod) {
       case "alphabetical":
@@ -16,9 +14,13 @@ const ClientList = ({ clients, getInitials }) => {
             `${b.first_name} ${b.last_name}`
           )
         );
-      case "lastUpdated":
+      case "queue":
         return clients.sort(
           (a, b) => new Date(a.last_updated) - new Date(b.last_updated)
+        );
+      case "recentlyModified":
+        return clients.sort(
+          (a, b) => new Date(b.last_updated) - new Date(a.last_updated)
         );
       default:
         return clients;
