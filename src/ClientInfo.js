@@ -367,6 +367,7 @@ function ClientInfo({ clients, setClients }) {
                     target: { name: "status", value: "active" },
                   })
                 }
+                className={editableClient.status === "active" ? "selected" : ""}
               >
                 Active
               </Dropdown.Item>
@@ -375,6 +376,9 @@ function ClientInfo({ clients, setClients }) {
                   handleStatusChange({
                     target: { name: "status", value: "waitlist" },
                   })
+                }
+                className={
+                  editableClient.status === "waitlist" ? "selected" : ""
                 }
               >
                 Waitlist
@@ -385,6 +389,9 @@ function ClientInfo({ clients, setClients }) {
                     target: { name: "status", value: "re-book" },
                   })
                 }
+                className={
+                  editableClient.status === "re-book" ? "selected" : ""
+                }
               >
                 Re-book
               </Dropdown.Item>
@@ -393,6 +400,9 @@ function ClientInfo({ clients, setClients }) {
                   handleStatusChange({
                     target: { name: "status", value: "archive" },
                   })
+                }
+                className={
+                  editableClient.status === "archive" ? "selected" : ""
                 }
               >
                 Archive
