@@ -16,7 +16,8 @@ const ClientList = ({ clients, getInitials, sortMethod, setSortMethod }) => {
         );
       case "queue":
         return clients.sort(
-          (a, b) => new Date(a.last_updated) - new Date(b.last_updated)
+          (a, b) =>
+            new Date(a.last_status_change) - new Date(b.last_status_change)
         );
       case "recentlyModified":
         return clients.sort(
