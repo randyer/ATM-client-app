@@ -80,7 +80,8 @@ exports.handler = async (event) => {
               favorite = $22,
               needs_review = $23,
               status = $24,
-              last_updated = $25
+              last_updated = $25,
+              last_status_change = $26
           ) RETURNING *;
         `;
         const insertValues = [
@@ -109,6 +110,7 @@ exports.handler = async (event) => {
           data.needs_review,
           data.status,
           data.last_updated,
+          data.last_status_change,
         ];
         const insertRes = await clientCONNECTION.query(
           insertQuery,
@@ -144,8 +146,9 @@ exports.handler = async (event) => {
               favorite = $22,
               needs_review = $23,
               status = $24,
-              last_updated = $25
-          WHERE id = $26 RETURNING *;
+              last_updated = $25,
+              last_status_change = $26
+          WHERE id = $27 RETURNING *;
         `;
         const updateValues = [
           data.first_name,
@@ -173,6 +176,7 @@ exports.handler = async (event) => {
           data.needs_review,
           data.status,
           data.last_updated,
+          data.last_status_change,
           id,
         ];
         const updateRes = await clientCONNECTION.query(
