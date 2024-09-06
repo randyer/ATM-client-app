@@ -99,16 +99,20 @@ function ClientInfo({ clients, setClients }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEditableClient((prevState) => ({ ...prevState, [name]: value }));
+    setEditableClient((prevState) => ({
+      ...prevState,
+      [name]: value,
+      last_updated: new Date().toISOString(),
+    }));
   };
 
   const handleStatusChange = (e) => {
     const newStatus = e.target.value;
-    const newLastUpdated = new Date().toISOString();
+    const newLastStatusChange = new Date().toISOString();
     setEditableClient((prevState) => ({
       ...prevState,
       status: newStatus,
-      last_updated: newLastUpdated,
+      last_status_change: newLastStatusChange,
     }));
   };
 
