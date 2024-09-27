@@ -7,6 +7,7 @@ import { fetchClients } from "./helper/ClientApi";
 // components
 import ClientList from "./components/ClientList";
 import ScrollToTop from "./components/ScrollToTop";
+import AddClientModal from "./components/addClientModal";
 
 // css
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
@@ -27,8 +28,12 @@ import { Button, Dropdown } from "react-bootstrap";
 
 function App() {
   const [clients, setClients] = useState([]);
+  const [newClient, setNewClient] = useState({});
   const [refreshClicked, setRefreshClicked] = useState(false);
   const [sortMethod, setSortMethod] = useState("alphabetical");
+  const [showModal, setShowModal] = useState(false);
+  const handleModalClose = () => setShowModal(false);
+  const handleModalShow = () => setShowModal(true);
 
   useEffect(() => {
     fetchClients(setClients);
@@ -41,78 +46,39 @@ function App() {
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState("active");
 
-  const addClient = async () => {
-    const newFirstName = prompt("Enter client first name:");
-    const newLastName = prompt("Enter client last name:");
-    const newPhone = prompt("Enter client phone number:");
-    const newEmail = prompt("Enter client email:");
-    const newDob = prompt("Enter client date of birth (YYYY-MM-DD):");
-    const newStreet = prompt("Enter client street address:");
-    const newCity = prompt("Enter client city:");
-    const newState = prompt("Enter client state:");
-    const newZip = prompt("Enter client zip code:");
-    const newEmergencyContact = prompt("Enter emergency contact name:");
-    const newEmergencyContactPhone = prompt(
-      "Enter emergency contact phone number:"
+  const addClient = async (newClient) => {
+    // Ensure any empty string fields in newClient are converted to null
+    const sanitizedClient = Object.fromEntries(
+      Object.entries(newClient).map(([key, value]) => [
+        key,
+        value === "" ? null : value,
+      ])
     );
-    const newHeardAboutUs = prompt("How did the client hear about us?");
-    const newCurrentSymptoms = prompt("Enter current symptoms:");
-    const newPastSymptoms = prompt("Enter past symptoms:");
-    const newPastInjuries = prompt("Enter past injuries:");
-    const newPastSurgeries = prompt("Enter past surgeries:");
-    const newGeneralNotes = prompt("Enter general notes:");
-    const newObjective = prompt("Enter objective:");
-    const newAssessment = prompt("Enter assessment:");
-    const newPlan = prompt("Enter plan:");
-    const newWaitlistNotes = prompt("Enter waitlist notes:");
 
-    if (newFirstName && newLastName && newPhone) {
-      const newClient = {
-        first_name: newFirstName || null,
-        last_name: newLastName || null,
-        phone: newPhone || null,
-        email: newEmail || null,
-        dob: newDob || null,
-        street: newStreet || null,
-        city: newCity || null,
-        state: newState || null,
-        zip: newZip || null,
-        emergency_contact: newEmergencyContact || null,
-        emergency_contact_phone: newEmergencyContactPhone || null,
-        heard_about_us: newHeardAboutUs || null,
-        current_symptoms: newCurrentSymptoms || null,
-        past_symptoms: newPastSymptoms || null,
-        past_injuries: newPastInjuries || null,
-        past_surgeries: newPastSurgeries || null,
-        general_notes: newGeneralNotes || null,
-        objective: newObjective || null,
-        assessment: newAssessment || null,
-        plan: newPlan || null,
-        waitlist_notes: newWaitlistNotes || null,
-        active: true,
-        favorite: false,
-        needs_review: false,
-        waitlisted: false,
-      };
-
+    console.log("Sanitized client:", sanitizedClient);
+    if (
+      sanitizedClient.first_name &&
+      sanitizedClient.last_name &&
+      sanitizedClient.phone
+    ) {
       try {
         // First, post the new client to the database
         const restOperation = await post({
           apiName: "apiclient",
           path: "/clients",
           options: {
-            body: { ...newClient },
+            body: { ...sanitizedClient },
           },
         });
-
         const { body } = await restOperation.response;
         const response = await body.json();
-
         if (response) {
+          console.log("Response from adding client:", response);
           fetchClients(setClients);
         }
       } catch (error) {
         console.error("Error adding or fetching clients:", error);
+        alert("Error adding client. Please try again.");
       }
     }
   };
@@ -215,9 +181,14 @@ function App() {
                             </button>
 
                             <AddButton
-                              onClick={addClient}
+                              onClick={handleModalShow}
                               className="svg-icon"
                             ></AddButton>
+                            <AddClientModal
+                              showModal={showModal}
+                              handleModalClose={handleModalClose}
+                              handleSubmitClient={addClient} // Pass addClient as a prop to submit the new client
+                            />
                             <SignOut
                               onClick={signOut}
                               className="svg-icon"
