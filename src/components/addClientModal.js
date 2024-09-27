@@ -162,42 +162,6 @@ function AddClientModal({ showModal, handleModalClose, handleSubmitClient }) {
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Current Symptoms</Form.Label>
-            <Form.Control
-              type="text"
-              name="current_symptoms"
-              value={newClient.current_symptoms}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Past Symptoms</Form.Label>
-            <Form.Control
-              type="text"
-              name="past_symptoms"
-              value={newClient.past_symptoms}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Past Injuries</Form.Label>
-            <Form.Control
-              type="text"
-              name="past_injuries"
-              value={newClient.past_injuries}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Past Surgeries</Form.Label>
-            <Form.Control
-              type="text"
-              name="past_surgeries"
-              value={newClient.past_surgeries}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>
