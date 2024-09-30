@@ -6,14 +6,13 @@ This progressive web application is designed to help massage therapists manage a
 
 ## Features
 
+**(The data shown in the following screenshots is entirely fictional.)**
+
 - **Home Page**:
 
 <!-- ![Home page](demoPictures/homepage.png) -->
 
-<div display="flex">
   <img src="demoPictures/homepage.png" alt="Homepage" display="inline" height="450">
-  <img src="demoPictures/homepage.png" alt="Alt text" display="inline" height="450">
-</div>
 
 - Organizes clients into four tabs based on their status:
   - **Active**
@@ -47,7 +46,7 @@ This progressive web application is designed to help massage therapists manage a
       - **Assessment**: Professional conclusions and diagnosis.
       - **Plan**: Recommended treatment and steps for future care.
     - **Profile**: Client contact information and demographic details.
-    - **Rebook Page**:
+    - **Rebook Page**: Notes for rebooking
 
 ## Technologies Used
 
