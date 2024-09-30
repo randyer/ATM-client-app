@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# Client Management App for Alton Therapeutic Massage
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+This progressive web application is designed to help massage therapists manage and track client information. The app allows users to store and organize client details such as contact information, appointment history, symptoms, treatment objectives, and plans.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Home Page**:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<!-- ![Home page](demoPictures/homepage.png) -->
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<div display="flex">
+  <img src="demoPictures/homepage.png" alt="Homepage" display="inline" height="450">
+  <img src="demoPictures/homepage.png" alt="Alt text" display="inline" height="450">
+</div>
 
-### `npm test`
+- Organizes clients into four tabs based on their status:
+  - **Active**
+  - **Waitlist**
+  - **Re-book**
+  - **Archived**
+- Each client is displayed with their name and a short general notes description.
+- Includes a **search bar** to quickly find clients and a **filter** option to sort clients by:
+  - Name
+  - List queue
+  - Recently modified
+- **Plus button** allows the addition of new clients to the system.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Client Info Page**:
+  <div display="flex">
+    <img src="demoPictures/generalNotes.png" alt="Homepage" display="inline" height="450">
+    <img src="demoPictures/SOAPnotes.png" alt="Alt text" display="inline" height="450">
+    <img src="demoPictures/contact.png" alt="Alt text" display="inline" height="450">
+  </div>
 
-### `npm run build`
+  - Used for updating all client information. Clients can fill out a form on Alton Therapeutic Massage's website. Submitting this form creates a profile within the app that defaults to the waitlist section.
+  - The top bar contains:
+    - A **status dropdown** to change the client's status.
+    - **Favorite toggle**: Mark the client as a favorite.
+    - **Important notes toggle**: Highlight clients with important notes to be reviewed before an appointment.
+  - Four tabs for organizing client details:
+    - **General Notes**: Free-form notes for capturing general client information.
+    - **SOAP Notes**: Structured notes following the SOAP format (Subjective, Objective, Assessment, Plan), which is a standardized method of documenting client interactions in healthcare:
+      - **Subjective**: Client's description of their symptoms and experiences. (Titled Overview in the app)
+      - **Objective**: Observable facts and clinical findings.
+      - **Assessment**: Professional conclusions and diagnosis.
+      - **Plan**: Recommended treatment and steps for future care.
+    - **Profile**: Client contact information and demographic details.
+    - **Rebook Page**:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technologies Used
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **React**: Front-end development
+- **AWS**:
+  - **AWS Amplify**: A service for hosting the frontend, as well as organizing backend services.
+  - **Amazon Cognito**: For secure user authentication and authorization.
+  - **AWS Lambda**: To handle serverless API operations and backend logic.
+  - **Amazon API Gateway**: For creating and managing APIs to communicate between the frontend and backend.
+  - **Amazon RDS** (PostgreSQL): For client and appointment data storage, encrypted to comply with HIPAA regulations for storing personal health information.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## TODO
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Incorporate Tailwind css into styling (improve styling, add transitions, etc)
