@@ -11,8 +11,10 @@ This progressive web application is designed to help massage therapists manage a
 - **Home Page**:
 
 <!-- ![Home page](demoPictures/homepage.png) -->
-
+<div display="flex">
   <img src="demoPictures/homepage.png" alt="Homepage" display="inline" height="450">
+  <img src="demoPictures/addClient.png" alt="add client page" display="inline" height="450">
+</div>
 
 - Organizes clients into four tabs based on their status:
   - **Active**
@@ -28,9 +30,9 @@ This progressive web application is designed to help massage therapists manage a
 
 - **Client Info Page**:
   <div display="flex">
-    <img src="demoPictures/generalNotes.png" alt="Homepage" display="inline" height="450">
-    <img src="demoPictures/SOAPnotes.png" alt="Alt text" display="inline" height="450">
-    <img src="demoPictures/contact.png" alt="Alt text" display="inline" height="450">
+    <img src="demoPictures/generalNotes.png" alt="general notes" display="inline" height="450">
+    <img src="demoPictures/SOAPnotes.png" alt="SOAP notes" display="inline" height="450">
+    <img src="demoPictures/contact.png" alt="contact" display="inline" height="450">
   </div>
 
   - Used for updating all client information. Clients can fill out a form on Alton Therapeutic Massage's website. Submitting this form creates a profile within the app that defaults to the waitlist section.
