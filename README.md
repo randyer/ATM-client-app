@@ -46,7 +46,7 @@ This progressive web application is designed to help massage therapists manage a
       - **Assessment**: Professional conclusions and diagnosis.
       - **Plan**: Recommended treatment and steps for future care.
     - **Profile**: Client contact information and demographic details.
-    - **Rebook Page**:
+    - **Rebook Page**: Notes for rebooking
 
 ## Technologies Used
 
