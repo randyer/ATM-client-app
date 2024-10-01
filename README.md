@@ -6,7 +6,7 @@ This web application is designed to help massage therapists manage and track cli
 
 ## Features
 
-**(The data shown in the following screenshots is entirely fictional.)**
+**(The information in the following screenshots is not real and is only for demonstration purposes.)**
 
 - **Home Page**:
 
