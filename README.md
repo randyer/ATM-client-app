@@ -2,7 +2,7 @@
 
 ## Description
 
-This progressive web application is designed to help massage therapists manage and track client information. The app allows users to store and organize client details such as contact information, appointment history, symptoms, treatment objectives, and plans.
+This web application is designed to help massage therapists manage and track client information. The app allows users to store and organize client details such as contact information, appointment history, symptoms, treatment objectives, and plans.
 
 ## Features
 
