@@ -58,17 +58,6 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "clientREST": {
-      "build": true,
-      "dependsOn": [],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "getClient": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "newPatientFormSubmission": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -129,38 +118,6 @@
         {
           "category": "function",
           "resourceName": "clientHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_clientREST_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "clientREST"
-        }
-      ]
-    },
-    "AMPLIFY_function_clientREST_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "clientREST"
-        }
-      ]
-    },
-    "AMPLIFY_function_getClient_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "getClient"
-        }
-      ]
-    },
-    "AMPLIFY_function_getClient_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "getClient"
         }
       ]
     },
