@@ -100,7 +100,7 @@
 }
 
 .soap-notes,
-.appointments {
+.scheduling {
   /* background: var(--input-bg); */
   padding: 1rem;
   border-radius: 5px;
@@ -112,7 +112,7 @@
 
 .client-details p,
 .soap-notes p,
-.appointments ul {
+.scheduling ul {
   margin: 0.5rem;
 }
 
@@ -122,7 +122,8 @@
 }
 
 .soap-notes textarea,
-.general-notes textarea {
+.general-notes textarea,
+.scheduling textarea {
   width: 95%;
   padding: 0.5rem;
   font-size: 1rem;
@@ -152,12 +153,12 @@
   height: 16rem;
 }
 
-.appointments ul {
+.scheduling ul {
   list-style-type: none;
   padding: 0;
 }
 
-.appointments li {
+.scheduling li {
   padding: 0.5rem;
   border-bottom: 1px solid var(--border);
 }

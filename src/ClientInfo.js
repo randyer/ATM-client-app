@@ -308,20 +308,17 @@ function ClientInfo({ clients, setClients }) {
     </div>
   );
 
-  const renderAppointmentsTab = () => (
-    <div className="appointments">
-      <h3>Appointments</h3>
-      <ul>
-        {editableClient.appointments ? (
-          editableClient.appointments.map((appointment, index) => (
-            <li key={index}>
-              {appointment.date} - {appointment.notes}
-            </li>
-          ))
-        ) : (
-          <li>No appointments found</li>
-        )}
-      </ul>
+  const renderSchedulingTab = () => (
+    <div className="scheduling">
+      <p>
+        <strong>Scheduling Notes:</strong>
+        <textarea
+          name="scheduling_notes"
+          value={editableClient.scheduling_notes || ""}
+          onChange={handleChange}
+          style={{ width: "100%", height: "200px" }}
+        ></textarea>
+      </p>
     </div>
   );
 
@@ -452,18 +449,16 @@ function ClientInfo({ clients, setClients }) {
           {activeTab === "profile" ? <ProfileFill /> : <Profile />}
         </div>
         <div
-          className={`tab-button ${
-            activeTab === "appointments" ? "active" : ""
-          }`}
-          onClick={() => setActiveTab("appointments")}
+          className={`tab-button ${activeTab === "scheduling" ? "active" : ""}`}
+          onClick={() => setActiveTab("scheduling")}
         >
-          {activeTab === "appointments" ? <AppointmentFill /> : <Appointment />}
+          {activeTab === "scheduling" ? <AppointmentFill /> : <Appointment />}
         </div>
       </div>
       {activeTab === "profile" && renderProfileTab()}
       {activeTab === "soap" && renderSoapTab()}
       {activeTab === "notes" && renderNotesTab()}
-      {activeTab === "appointments" && renderAppointmentsTab()}
+      {activeTab === "scheduling" && renderSchedulingTab()}
     </div>
   );
 }
