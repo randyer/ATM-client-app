@@ -205,11 +205,11 @@ function App() {
                             </button>
                             <button
                               className={`tab ${
-                                activeTab === "active" ? "active" : ""
+                                activeTab === "re-book" ? "active" : ""
                               }`}
-                              onClick={() => setActiveTab("active")}
+                              onClick={() => setActiveTab("re-book")}
                             >
-                              Active
+                              Book
                             </button>
                             <button
                               className={`tab ${
@@ -221,11 +221,11 @@ function App() {
                             </button>
                             <button
                               className={`tab ${
-                                activeTab === "re-book" ? "active" : ""
+                                activeTab === "active" ? "active" : ""
                               }`}
-                              onClick={() => setActiveTab("re-book")}
+                              onClick={() => setActiveTab("active")}
                             >
-                              Book
+                              Active
                             </button>
                             <button
                               className={`tab ${
