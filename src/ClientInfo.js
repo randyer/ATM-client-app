@@ -380,12 +380,14 @@ function ClientInfo({ clients, setClients }) {
               <Dropdown.Item
                 onClick={() =>
                   handleStatusChange({
-                    target: { name: "status", value: "active" },
+                    target: { name: "status", value: "re-book" },
                   })
                 }
-                className={editableClient.status === "active" ? "selected" : ""}
+                className={
+                  editableClient.status === "re-book" ? "selected" : ""
+                }
               >
-                Active
+                Book
               </Dropdown.Item>
               <Dropdown.Item
                 onClick={() =>
@@ -402,14 +404,12 @@ function ClientInfo({ clients, setClients }) {
               <Dropdown.Item
                 onClick={() =>
                   handleStatusChange({
-                    target: { name: "status", value: "re-book" },
+                    target: { name: "status", value: "active" },
                   })
                 }
-                className={
-                  editableClient.status === "re-book" ? "selected" : ""
-                }
+                className={editableClient.status === "active" ? "selected" : ""}
               >
-                Re-book
+                Active
               </Dropdown.Item>
               <Dropdown.Item
                 onClick={() =>
