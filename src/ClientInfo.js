@@ -370,6 +370,16 @@ function ClientInfo({ clients, setClients }) {
               <Dropdown.Item
                 onClick={() =>
                   handleStatusChange({
+                    target: { name: "status", value: "today" },
+                  })
+                }
+                className={editableClient.status === "today" ? "selected" : ""}
+              >
+                Today
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() =>
+                  handleStatusChange({
                     target: { name: "status", value: "active" },
                   })
                 }

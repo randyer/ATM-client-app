@@ -44,7 +44,7 @@ function App() {
   }, [clients]);
 
   const [search, setSearch] = useState("");
-  const [activeTab, setActiveTab] = useState("active");
+  const [activeTab, setActiveTab] = useState("today");
 
   const addClient = async (newClient) => {
     // Ensure any empty string fields in newClient are converted to null
@@ -197,6 +197,14 @@ function App() {
                           <div className="tabs">
                             <button
                               className={`tab ${
+                                activeTab === "today" ? "active" : ""
+                              }`}
+                              onClick={() => setActiveTab("today")}
+                            >
+                              Today
+                            </button>
+                            <button
+                              className={`tab ${
                                 activeTab === "active" ? "active" : ""
                               }`}
                               onClick={() => setActiveTab("active")}
@@ -217,7 +225,7 @@ function App() {
                               }`}
                               onClick={() => setActiveTab("re-book")}
                             >
-                              Re-book
+                              Book
                             </button>
                             <button
                               className={`tab ${
