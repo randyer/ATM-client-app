@@ -162,7 +162,7 @@ function App() {
     <div className="App flex flex-col">
       {/* <Authenticator hideSignUp={true}> */}
       {/* {({ signOut }) => ( */}
-      <Router basename="">
+      <Router basename="/ATM-client-app">
         <ScrollToTop />
 
         <Routes>
