@@ -174,7 +174,7 @@ function App() {
                           }}
                           className={refreshClicked ? "button-clicked" : ""}
                         >
-                          <h1>
+                          <h1 className="flex items-center">
                             Clients <Refresh className="svg-icon" />
                           </h1>
                         </button>
@@ -246,7 +246,7 @@ function App() {
                         <Dropdown>
                           <Dropdown.Toggle
                             id="dropdown-basic"
-                            className="dropdown-button"
+                            className="dropdown-button flex flex-row"
                           >
                             {sortMethod === "alphabetical" && (
                               <SortAlpha className="svg-icon" />
