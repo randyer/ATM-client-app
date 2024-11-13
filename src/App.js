@@ -251,7 +251,9 @@ function App() {
                     <AddClientModal
                       showModal={showModal}
                       handleModalClose={handleModalClose}
-                      handleSubmitClient={addClient} // Pass addClient as a prop to submit the new client
+                      handleSubmitClient={(newClient) => {
+                        setClients([...clients, newClient]);
+                      }} // Pass addClient as a prop to submit the new client
                     />
                     <SignOut
                       // onClick={signOut}

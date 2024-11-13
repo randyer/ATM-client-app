@@ -2,6 +2,16 @@ import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
 function AddClientModal({ showModal, handleModalClose, handleSubmitClient }) {
+  function generateUUID() {
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+      (
+        c ^
+        (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+      ).toString(16)
+    );
+  }
+
+  console.log(generateUUID());
   const [newClient, setNewClient] = useState({
     first_name: "",
     last_name: "",
@@ -26,7 +36,8 @@ function AddClientModal({ showModal, handleModalClose, handleSubmitClient }) {
     plan: "",
     favorite: "",
     needs_review: "",
-    status: "",
+    status: "waitlist",
+    id: generateUUID(),
     last_updated: "",
     last_status_change: "",
   });
