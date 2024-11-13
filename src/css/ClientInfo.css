@@ -1,8 +1,8 @@
 /* ClientInfo.css */
 
 .client-info-page {
-  /* display:flex; */
-  /* flex-direction: column; */
+  display: flex;
+  flex-direction: column;
   /* align-items: center; */
   /* padding: 1rem; */
   font-family: Arial, sans-serif;
@@ -124,13 +124,15 @@
 .soap-notes textarea,
 .general-notes textarea,
 .scheduling textarea {
-  width: 95%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  background-color: var(--input-bg);
-  color: var(--foreground);
+  /* flex-grow: 1;  */
+  /* width: 100%;  */
+  /* min-height: 100px; */
+  /* padding: 0.5rem; */
+  /* font-size: 1rem; */
+  /* border: 1px solid var(--border); */
+  /* border-radius: 5px; */
+  /* background-color: var(--input-bg); */
+  /* color: var(--foreground); */
 }
 
 .client-details input {
@@ -149,10 +151,6 @@
   width: 95%;
 }
 
-.soap-notes textarea {
-  height: 16rem;
-}
-
 .scheduling ul {
   list-style-type: none;
   padding: 0;
@@ -161,4 +159,9 @@
 .scheduling li {
   padding: 0.5rem;
   border-bottom: 1px solid var(--border);
+}
+
+.swiper-wrapper {
+  position: absolute !important;
+  bottom: 0;
 }

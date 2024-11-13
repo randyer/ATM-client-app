@@ -160,3 +160,26 @@ h1 {
 .search-bar {
   flex: 1;
 }
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  display: none !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  display: none !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: white !important;
+}
+
+.swiper-pagination-bullet {
+  background: white !important;
+}
+
+.swiper {
+  width: 100% !important;
+  height: 100% !important;
+}

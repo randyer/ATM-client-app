@@ -8,6 +8,15 @@ import Toggle from "./components/ToggleButton";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { del, put } from "aws-amplify/api";
 import { Autosave, useAutosave } from "react-autosave";
+import Carousel from "./components/Carousel";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper/modules";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 // icons
 import { ReactComponent as Star } from "./icons/star.svg";
@@ -271,73 +280,160 @@ function ClientInfo({ clients, setClients }) {
     </div>
   );
 
+  const textAreaClass =
+    "w-[100% - 4px] max-w-screen bg-zinc-800 p-2 m-2 flex-grow";
+
   const renderSoapTab = () => (
-    <div className="soap-notes">
-      <p>
-        <strong>Overview: </strong>
-        <textarea
-          name="form_data"
-          value={editableClient.form_data || ""}
-          onChange={handleChange}
-        ></textarea>
-      </p>
-      <p>
-        <strong>Objective: </strong> (Visual/Palpable)
-        <textarea
-          name="objective"
-          value={editableClient.objective || ""}
-          onChange={handleChange}
-        ></textarea>
-      </p>
-      <p>
-        <strong>Assessment: </strong> (Long/Short Term Goals)
-        <textarea
-          name="assessment"
-          value={editableClient.assessment || ""}
-          onChange={handleChange}
-        ></textarea>
-      </p>
-      <p>
-        <strong>Plan:</strong> (Future Treatment)
-        <textarea
-          name="plan"
-          value={editableClient.plan || ""}
-          onChange={handleChange}
-        ></textarea>
-      </p>
-    </div>
+    <>
+      {/* <Carousel>
+        <div
+          className="flex flex-col"
+          style={{ minWidth: "100%", height: "100%", scrollSnapAlign: "start" }}
+        >
+          <p>Overview:</p>
+          <textarea
+            name="form_data"
+            value={editableClient.form_data || ""}
+            onChange={handleChange}
+            className={textAreaClass}
+            style={textAreaStyle}
+          ></textarea>
+        </div>
+        <div style={{ minWidth: "100%", scrollSnapAlign: "start" }}>
+          <p>Objective: (Visual/Palpable)</p>
+          <textarea
+            name="objective"
+            value={editableClient.objective || ""}
+            onChange={handleChange}
+            className={textAreaClass}
+            style={textAreaStyle}
+          ></textarea>
+        </div>
+        <div style={{ minWidth: "100%", scrollSnapAlign: "start" }}>
+          <p>Assessment: (Long/Short Term Goals)</p>
+          <textarea
+            name="assessment"
+            value={editableClient.assessment || ""}
+            onChange={handleChange}
+            className={textAreaClass}
+            style={textAreaStyle}
+          ></textarea>
+        </div>
+        <div style={{ minWidth: "100%", scrollSnapAlign: "start" }}>
+          <p>Plan: (Future Treatment)</p>
+          <textarea
+            name="plan"
+            value={editableClient.plan || ""}
+            onChange={handleChange}
+            className={textAreaClass}
+            style={textAreaStyle}
+          ></textarea>
+        </div>
+      </Carousel> */}
+      {/* <Carousel>
+        <div className="flex flex-col h-full w-full">
+          <p>title</p>
+          <textarea className="bg-zinc-800 max-w-full h-full p-2 m-2 resize-none">
+            test
+          </textarea>
+        </div>
+        <div className="flex flex-col h-full w-full">
+          <p>title</p>
+          <textarea className="bg-zinc-800 max-w-full h-full p-2 m-2 resize-none">
+            test
+          </textarea>
+        </div>
+      </Carousel> */}
+
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={30}
+        loop={true}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Pagination, Navigation]}
+        className="mySwiper relative flex-grow w-full h-full"
+      >
+        <SwiperSlide className="absolute top-0 bottom-0 flex justify-center items-center">
+          <div className="flex flex-col h-full w-full">
+            <p>Overview:</p>
+            <textarea
+              name="form_data"
+              value={editableClient.form_data || ""}
+              onChange={handleChange}
+              className={textAreaClass}
+            ></textarea>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className="flex justify-center items-center">
+          <div className="flex flex-col h-full w-full">
+            <p>Objective: (Visual/Palpable)</p>
+            <textarea
+              name="objective"
+              value={editableClient.objective || ""}
+              onChange={handleChange}
+              className={textAreaClass}
+            ></textarea>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className="flex justify-center items-center">
+          <div className="flex flex-col h-full w-full">
+            <p>Assessment: (Long/Short Term Goals)</p>
+            <textarea
+              name="assessment"
+              value={editableClient.assessment || ""}
+              onChange={handleChange}
+              className={textAreaClass}
+            ></textarea>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className="flex justify-center items-center">
+          <div className="flex flex-col h-full w-full">
+            <p>Plan: (Future Treatment)</p>
+            <textarea
+              name="plan"
+              value={editableClient.plan || ""}
+              onChange={handleChange}
+              className={textAreaClass}
+            ></textarea>
+          </div>
+        </SwiperSlide>
+      </Swiper>
+    </>
   );
 
   const renderSchedulingTab = () => (
-    <div className="scheduling">
+    <div className="relative flex flex-col flex-grow w-full h-full">
       <p>
         <strong>Scheduling Notes:</strong>
-        <textarea
-          name="scheduling_notes"
-          value={editableClient.scheduling_notes || ""}
-          onChange={handleChange}
-          style={{ width: "100%", height: "200px" }}
-        ></textarea>
       </p>
+      <textarea
+        name="scheduling_notes"
+        value={editableClient.scheduling_notes || ""}
+        onChange={handleChange}
+        className={textAreaClass}
+      ></textarea>
     </div>
   );
 
   const renderNotesTab = () => (
-    <div className="general-notes">
+    <div className="relative flex flex-col flex-grow w-full h-full">
       <p>
         <strong>General Notes:</strong>
-        <textarea
-          name="general_notes"
-          value={editableClient.general_notes || ""}
-          onChange={handleChange}
-          style={{ width: "100%", height: "200px" }}
-        ></textarea>
       </p>
+      <textarea
+        name="general_notes"
+        value={editableClient.general_notes || ""}
+        onChange={handleChange}
+        className={textAreaClass}
+      ></textarea>
     </div>
   );
 
   return (
-    <div className="client-info-page">
+    <>
       <header className="client-info-header">
         <Link
           onClick={() => updateClient(editableClient)}
@@ -380,14 +476,12 @@ function ClientInfo({ clients, setClients }) {
               <Dropdown.Item
                 onClick={() =>
                   handleStatusChange({
-                    target: { name: "status", value: "re-book" },
+                    target: { name: "status", value: "active" },
                   })
                 }
-                className={
-                  editableClient.status === "re-book" ? "selected" : ""
-                }
+                className={editableClient.status === "active" ? "selected" : ""}
               >
-                Book
+                Active
               </Dropdown.Item>
               <Dropdown.Item
                 onClick={() =>
@@ -404,12 +498,14 @@ function ClientInfo({ clients, setClients }) {
               <Dropdown.Item
                 onClick={() =>
                   handleStatusChange({
-                    target: { name: "status", value: "active" },
+                    target: { name: "status", value: "re-book" },
                   })
                 }
-                className={editableClient.status === "active" ? "selected" : ""}
+                className={
+                  editableClient.status === "re-book" ? "selected" : ""
+                }
               >
-                Active
+                Book
               </Dropdown.Item>
               <Dropdown.Item
                 onClick={() =>
@@ -469,7 +565,7 @@ function ClientInfo({ clients, setClients }) {
       {activeTab === "soap" && renderSoapTab()}
       {activeTab === "notes" && renderNotesTab()}
       {activeTab === "scheduling" && renderSchedulingTab()}
-    </div>
+    </>
   );
 }
 
