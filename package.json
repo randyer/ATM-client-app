@@ -2,7 +2,7 @@
   "name": "atm-client-manager",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://gh-pages.d3l8z2c1r2gzuq.amplifyapp.com/",
+  "homepage": "https://randyer.github.io/ATM-client-app/",
   "dependencies": {
     "@aws-amplify/api": "^6.0.42",
     "@aws-amplify/ui-react": "^6.1.14",
