@@ -505,7 +505,7 @@ function ClientInfo({ clients, setClients }) {
                   editableClient.status === "re-book" ? "selected" : ""
                 }
               >
-                Re-book
+                Book
               </Dropdown.Item>
               <Dropdown.Item
                 onClick={() =>
