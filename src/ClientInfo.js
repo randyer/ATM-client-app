@@ -356,7 +356,7 @@ function ClientInfo({ clients, setClients }) {
         modules={[Pagination, Navigation]}
         className="mySwiper relative flex-grow w-full h-full"
       >
-        <SwiperSlide className=" absolute top-0 bottom-0 flex justify-center items-center">
+        <SwiperSlide className="absolute top-0 bottom-0 flex justify-center items-center">
           <div className="flex flex-col h-full w-full">
             <p>Overview:</p>
             <textarea
@@ -405,21 +405,21 @@ function ClientInfo({ clients, setClients }) {
   );
 
   const renderSchedulingTab = () => (
-    <div className="scheduling">
+    <div className="relative flex flex-col flex-grow w-full h-full">
       <p>
         <strong>Scheduling Notes:</strong>
-        <textarea
-          name="scheduling_notes"
-          value={editableClient.scheduling_notes || ""}
-          onChange={handleChange}
-          style={{ width: "100%", height: "200px" }}
-        ></textarea>
       </p>
+      <textarea
+        name="scheduling_notes"
+        value={editableClient.scheduling_notes || ""}
+        onChange={handleChange}
+        className={textAreaClass}
+      ></textarea>
     </div>
   );
 
   const renderNotesTab = () => (
-    <div className="relative w-full h-full flex-grow">
+    <div className="relative flex flex-col flex-grow w-full h-full">
       <p>
         <strong>General Notes:</strong>
       </p>
@@ -427,7 +427,7 @@ function ClientInfo({ clients, setClients }) {
         name="general_notes"
         value={editableClient.general_notes || ""}
         onChange={handleChange}
-        className="absolute bottom-0 top-6 left-4 w-[calc(100%-24px)] bg-zinc-800"
+        className={textAreaClass}
       ></textarea>
     </div>
   );
