@@ -10,6 +10,14 @@ import { del, put } from "aws-amplify/api";
 import { Autosave, useAutosave } from "react-autosave";
 import Carousel from "./components/Carousel";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper/modules";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
 // icons
 import { ReactComponent as Star } from "./icons/star.svg";
 import { ReactComponent as StarFill } from "./icons/startFill.svg";
@@ -274,10 +282,6 @@ function ClientInfo({ clients, setClients }) {
 
   const textAreaClass =
     "w-[100% - 4px] max-w-screen bg-zinc-800 p-2 m-2 flex-grow";
-  const textAreaStyle = {
-    width: "calc(100% - 1rem)",
-    // height: "calc(100% - 3.5rem)",
-  };
 
   const renderSoapTab = () => (
     <>
@@ -326,8 +330,7 @@ function ClientInfo({ clients, setClients }) {
           ></textarea>
         </div>
       </Carousel> */}
-      <Carousel>
-        {/* <textarea className="bg-slate-600 w-full h-full">test</textarea> */}
+      {/* <Carousel>
         <div className="flex flex-col h-full w-full">
           <p>title</p>
           <textarea className="bg-zinc-800 max-w-full h-full p-2 m-2 resize-none">
@@ -340,7 +343,64 @@ function ClientInfo({ clients, setClients }) {
             test
           </textarea>
         </div>
-      </Carousel>
+      </Carousel> */}
+
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={30}
+        loop={true}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Pagination, Navigation]}
+        className="mySwiper relative flex-grow w-full h-full"
+      >
+        <SwiperSlide className=" absolute top-0 bottom-0 flex justify-center items-center">
+          <div className="flex flex-col h-full w-full">
+            <p>Overview:</p>
+            <textarea
+              name="form_data"
+              value={editableClient.form_data || ""}
+              onChange={handleChange}
+              className={textAreaClass}
+            ></textarea>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className="flex justify-center items-center">
+          <div className="flex flex-col h-full w-full">
+            <p>Objective: (Visual/Palpable)</p>
+            <textarea
+              name="objective"
+              value={editableClient.objective || ""}
+              onChange={handleChange}
+              className={textAreaClass}
+            ></textarea>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className="flex justify-center items-center">
+          <div className="flex flex-col h-full w-full">
+            <p>Assessment: (Long/Short Term Goals)</p>
+            <textarea
+              name="assessment"
+              value={editableClient.assessment || ""}
+              onChange={handleChange}
+              className={textAreaClass}
+            ></textarea>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className="flex justify-center items-center">
+          <div className="flex flex-col h-full w-full">
+            <p>Plan: (Future Treatment)</p>
+            <textarea
+              name="plan"
+              value={editableClient.plan || ""}
+              onChange={handleChange}
+              className={textAreaClass}
+            ></textarea>
+          </div>
+        </SwiperSlide>
+      </Swiper>
     </>
   );
 
@@ -359,7 +419,7 @@ function ClientInfo({ clients, setClients }) {
   );
 
   const renderNotesTab = () => (
-    <div className="w-full h-full flex-grow">
+    <div className="relative w-full h-full flex-grow">
       <p>
         <strong>General Notes:</strong>
       </p>
@@ -367,8 +427,7 @@ function ClientInfo({ clients, setClients }) {
         name="general_notes"
         value={editableClient.general_notes || ""}
         onChange={handleChange}
-        className={textAreaClass}
-        style={textAreaStyle}
+        className="absolute bottom-0 top-6 left-4 w-[calc(100%-24px)] bg-zinc-800"
       ></textarea>
     </div>
   );

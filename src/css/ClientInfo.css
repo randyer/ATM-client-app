@@ -162,6 +162,6 @@
 }
 
 .swiper-wrapper {
-  display: flex !important;
-  flex-grow: 1 !important;
+  position: absolute !important;
+  bottom: 0;
 }
