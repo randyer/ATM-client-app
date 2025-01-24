@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import ClientInfo from "./ClientInfo";
 import { post } from "aws-amplify/api";
 import { fetchClients } from "./helper/ClientApi";
@@ -16,6 +16,7 @@ import "./css/App.css";
 
 // svgs
 import { ReactComponent as AddButton } from "./icons/add.svg";
+import { ReactComponent as Chat } from "./icons/chat.svg";
 import { ReactComponent as SignOut } from "./icons/logout.svg";
 import { ReactComponent as Refresh } from "./icons/refresh.svg";
 import { ReactComponent as SortAlpha } from "./icons/sortAlpha.svg";
@@ -94,63 +95,6 @@ function App() {
         .includes(search.toLowerCase()) && client.status === activeTab
   );
 
-  // let clientTesting = [
-  //   {
-  //     id: 1,
-  //     firstName: "Anna",
-  //     lastName: "Haro",
-  //     phone: "555-522-8243",
-  //     email: "anna-haro@mac.com",
-  //     dob: "1980-01-01",
-  //     address: {
-  //       street: "123 Apple St",
-  //       city: "Cupertino",
-  //       state: "CA",
-  //       zip: "95014",
-  //     },
-  //     emergencyContact: "John Haro",
-  //     emergencyContactPhone: "555-123-4567",
-  //     heardAboutUs: "Google",
-  //     currentSymptoms: "Headache",
-  //     pastSymptoms: "Back pain",
-  //     pastInjuries: "Broken leg",
-  //     pastSurgeries: "Appendectomy",
-  //     formData:
-  //       "Current Symptoms: Headache\nPast Symptoms: Back pain\nPast Injuries: Broken leg\nPast Surgeries: Appendectomy",
-  //     active: true,
-  //     favorite: true,
-  //     needsReview: false,
-  //     waitlisted: false,
-  //   },
-  //   {
-  //     id: 2,
-  //     firstName: "Daniel",
-  //     lastName: "Higgins Jr.",
-  //     phone: "555-478-7672",
-  //     email: "d-higgins@mac.com",
-  //     dob: "1985-02-15",
-  //     address: {
-  //       street: "456 Banana Blvd",
-  //       city: "Cupertino",
-  //       state: "CA",
-  //       zip: "95014",
-  //     },
-  //     emergencyContact: "Jane Higgins",
-  //     emergencyContactPhone: "555-234-5678",
-  //     heardAboutUs: "Facebook",
-  //     currentSymptoms: "Neck pain",
-  //     pastSymptoms: "Shoulder pain",
-  //     pastInjuries: "Sprained ankle",
-  //     pastSurgeries: "Knee surgery",
-  //     formData:
-  //       "Current Symptoms: Neck pain\nPast Symptoms: Shoulder pain\nPast Injuries: Sprained ankle\nPast Surgeries: Knee surgery",
-  //     active: true,
-  //     favorite: false,
-  //     needsReview: false,
-  //     waitlisted: false,
-  //   },
-  // ];
-
   return (
     <div className="App flex flex-col">
       <Authenticator hideSignUp={true}>
@@ -178,6 +122,32 @@ function App() {
                             Clients <Refresh className="svg-icon" />
                           </h1>
                         </button>
+                        <Dropdown>
+                          <Dropdown.Toggle
+                            id="dropdown-basic"
+                            className="dropdown-button flex flex-row"
+                          >
+                            <Chat></Chat>
+                          </Dropdown.Toggle>
+
+                          <Dropdown.Menu>
+                            {clients
+                              .filter(
+                                (client) =>
+                                  client.first_name === "Pamela" ||
+                                  client.first_name === "Elaine"
+                              )
+                              .map((client) => (
+                                <Dropdown.Item
+                                  as={Link}
+                                  key={client.id}
+                                  to={`/client/${client.id}`}
+                                >
+                                  Notes for {client.first_name}
+                                </Dropdown.Item>
+                              ))}
+                          </Dropdown.Menu>
+                        </Dropdown>
 
                         <AddButton
                           onClick={handleModalShow}
@@ -291,7 +261,17 @@ function App() {
                       </div>
                     </div>
                     <ClientList
-                      clients={filteredClients}
+                      clients={filteredClients.filter(
+                        (client) =>
+                          !(
+                            client.first_name === "Pamela" &&
+                            client.last_name === "Bothwick"
+                          ) &&
+                          !(
+                            client.first_name === "Elaine" &&
+                            client.last_name === "Jimenez"
+                          )
+                      )}
                       getInitials={getInitials}
                       waitlist={activeTab === "waitlist"}
                       setClients={setClients}

@@ -423,6 +423,18 @@ function ClientInfo({ clients, setClients }) {
       <p>
         <strong>General Notes:</strong>
       </p>
+      <p style={{ padding: "0px", margin: "0px" }}>
+        {`last updated: ${new Date(editableClient.last_updated).toLocaleString(
+          "en-US",
+          {
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          }
+        )}`}
+      </p>
       <textarea
         name="general_notes"
         value={editableClient.general_notes || ""}
