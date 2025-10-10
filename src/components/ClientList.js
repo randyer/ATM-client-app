@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 // svgs
 import { ReactComponent as NeedsReview } from "../icons/importantFill.svg";
 import { ReactComponent as StarFill } from "../icons/startFill.svg";
+import { ReactComponent as Arrow } from "../icons/backArrow.svg";
 
 const ClientList = ({ clients, getInitials, sortMethod, setSortMethod }) => {
   const sortClients = (clients) => {
@@ -64,6 +65,10 @@ const ClientList = ({ clients, getInitials, sortMethod, setSortMethod }) => {
                 )}
               </div>
             </Link>
+            {/* Up arrow */}
+            <Arrow style={{ transform: "rotate(90deg)" }}></Arrow>
+            {/* Down arrow */}
+            <Arrow style={{ transform: "rotate(-90deg)" }}></Arrow>
           </li>
         ))}
       </ul>
