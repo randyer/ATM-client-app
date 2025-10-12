@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import ClientInfo from "./ClientInfo";
 import { post } from "aws-amplify/api";
@@ -22,6 +22,7 @@ import { ReactComponent as Refresh } from "./icons/refresh.svg";
 import { ReactComponent as SortAlpha } from "./icons/sortAlpha.svg";
 import { ReactComponent as Upcoming } from "./icons/upcoming.svg";
 import { ReactComponent as Modified } from "./icons/history.svg";
+import { ReactComponent as Sort } from "./icons/sort.svg";
 
 import { Authenticator, withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
@@ -35,6 +36,18 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const handleModalClose = () => setShowModal(false);
   const handleModalShow = () => setShowModal(true);
+
+  const handleUpdateListOrder = useCallback((updatedSubset) => {
+    setClients((prev) =>
+      prev.map((client) => {
+        const updated = updatedSubset.find((c) => c.id === client.id);
+        return updated
+          ? { ...client, list_position: updated.list_position }
+          : client;
+      })
+    );
+    console.log("calling handleupdate");
+  }, []);
 
   useEffect(() => {
     fetchClients(setClients);
@@ -227,6 +240,10 @@ function App() {
                             {sortMethod === "recentlyModified" && (
                               <Modified className="svg-icon" />
                             )}
+                            {sortMethod === "custom" && (
+                              <Sort className="svg-icon" />
+                            )}{" "}
+                            {/* optional custom icon */}
                           </Dropdown.Toggle>
 
                           <Dropdown.Menu>
@@ -238,6 +255,7 @@ function App() {
                             >
                               By Name
                             </Dropdown.Item>
+
                             <Dropdown.Item
                               onClick={() => setSortMethod("queue")}
                               className={
@@ -246,6 +264,7 @@ function App() {
                             >
                               Queue
                             </Dropdown.Item>
+
                             <Dropdown.Item
                               onClick={() => setSortMethod("recentlyModified")}
                               className={
@@ -255,6 +274,15 @@ function App() {
                               }
                             >
                               Recently modified
+                            </Dropdown.Item>
+
+                            <Dropdown.Item
+                              onClick={() => setSortMethod("custom")}
+                              className={
+                                sortMethod === "custom" ? "selected" : ""
+                              }
+                            >
+                              Custom
                             </Dropdown.Item>
                           </Dropdown.Menu>
                         </Dropdown>
@@ -276,7 +304,7 @@ function App() {
                       waitlist={activeTab === "waitlist"}
                       setClients={setClients}
                       sortMethod={sortMethod}
-                      setSortMethod={setSortMethod}
+                      onUpdateListOrder={handleUpdateListOrder} // ← pass here
                     />
                   </>
                 }
