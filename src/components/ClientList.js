@@ -159,14 +159,18 @@ const ClientList = ({
             </Link>
 
             {/* Up/Down Arrows */}
-            <Arrow
-              style={{ transform: "rotate(90deg)", cursor: "pointer" }}
-              onClick={() => handleMove(client.id, "up")}
-            />
-            <Arrow
-              style={{ transform: "rotate(-90deg)", cursor: "pointer" }}
-              onClick={() => handleMove(client.id, "down")}
-            />
+            {sortMethod === "custom" && (
+              <>
+                <Arrow
+                  style={{ transform: "rotate(90deg)", cursor: "pointer" }}
+                  onClick={() => handleMove(client.id, "up")}
+                />
+                <Arrow
+                  style={{ transform: "rotate(-90deg)", cursor: "pointer" }}
+                  onClick={() => handleMove(client.id, "down")}
+                />
+              </>
+            )}
           </li>
         ))}
       </ul>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import ClientInfo from "./ClientInfo";
-import { post } from "aws-amplify/api";
+import { post, put } from "aws-amplify/api";
 import { fetchClients } from "./helper/ClientApi";
 
 // components
@@ -32,10 +32,11 @@ function App() {
   const [clients, setClients] = useState([]);
   const [newClient, setNewClient] = useState({});
   const [refreshClicked, setRefreshClicked] = useState(false);
-  const [sortMethod, setSortMethod] = useState("alphabetical");
+  const [sortMethod, setSortMethod] = useState("custom");
   const [showModal, setShowModal] = useState(false);
   const handleModalClose = () => setShowModal(false);
   const handleModalShow = () => setShowModal(true);
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleUpdateListOrder = useCallback((updatedSubset) => {
     setClients((prev) =>
@@ -48,6 +49,35 @@ function App() {
     );
     console.log("calling handleupdate");
   }, []);
+
+  const saveCustomOrder = async () => {
+    setIsSaving(true);
+    try {
+      const clientsToUpdate = filteredClients.map((client) => ({
+        id: client.id,
+        list_position: client.list_position,
+      }));
+
+      const restOperation = await put({
+        apiName: "apiclient",
+        path: "/clients",
+        options: {
+          body: clientsToUpdate,
+        },
+      });
+
+      const { body } = await restOperation.response;
+      const response = await body.json();
+
+      console.log("Order saved successfully:", response);
+      alert("Order saved successfully!");
+    } catch (error) {
+      console.error("Error saving order:", error);
+      alert("Error saving order. Please try again.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   useEffect(() => {
     fetchClients(setClients);
@@ -286,6 +316,11 @@ function App() {
                             </Dropdown.Item>
                           </Dropdown.Menu>
                         </Dropdown>
+                        {sortMethod === "custom" && (
+                          <Button onClick={saveCustomOrder} disabled={isSaving}>
+                            {isSaving ? "Saving..." : "Save Order"}
+                          </Button>
+                        )}{" "}
                       </div>
                     </div>
                     <ClientList
