@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import ClientInfo from "./ClientInfo";
-import { post } from "aws-amplify/api";
+import { post, put } from "aws-amplify/api";
 import { fetchClients } from "./helper/ClientApi";
 
 // components
@@ -22,6 +22,7 @@ import { ReactComponent as Refresh } from "./icons/refresh.svg";
 import { ReactComponent as SortAlpha } from "./icons/sortAlpha.svg";
 import { ReactComponent as Upcoming } from "./icons/upcoming.svg";
 import { ReactComponent as Modified } from "./icons/history.svg";
+import { ReactComponent as Sort } from "./icons/sort.svg";
 
 import { Authenticator, withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
@@ -31,10 +32,52 @@ function App() {
   const [clients, setClients] = useState([]);
   const [newClient, setNewClient] = useState({});
   const [refreshClicked, setRefreshClicked] = useState(false);
-  const [sortMethod, setSortMethod] = useState("alphabetical");
+  const [sortMethod, setSortMethod] = useState("custom");
   const [showModal, setShowModal] = useState(false);
   const handleModalClose = () => setShowModal(false);
   const handleModalShow = () => setShowModal(true);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleUpdateListOrder = useCallback((updatedSubset) => {
+    setClients((prev) =>
+      prev.map((client) => {
+        const updated = updatedSubset.find((c) => c.id === client.id);
+        return updated
+          ? { ...client, list_position: updated.list_position }
+          : client;
+      })
+    );
+    console.log("calling handleupdate");
+  }, []);
+
+  const saveCustomOrder = async () => {
+    setIsSaving(true);
+    try {
+      const clientsToUpdate = filteredClients.map((client) => ({
+        id: client.id,
+        list_position: client.list_position,
+      }));
+
+      const restOperation = await put({
+        apiName: "apiclient",
+        path: "/clients",
+        options: {
+          body: clientsToUpdate,
+        },
+      });
+
+      const { body } = await restOperation.response;
+      const response = await body.json();
+
+      console.log("Order saved successfully:", response);
+      alert("Order saved successfully!");
+    } catch (error) {
+      console.error("Error saving order:", error);
+      alert("Error saving order. Please try again.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   useEffect(() => {
     fetchClients(setClients);
@@ -227,6 +270,10 @@ function App() {
                             {sortMethod === "recentlyModified" && (
                               <Modified className="svg-icon" />
                             )}
+                            {sortMethod === "custom" && (
+                              <Sort className="svg-icon" />
+                            )}{" "}
+                            {/* optional custom icon */}
                           </Dropdown.Toggle>
 
                           <Dropdown.Menu>
@@ -238,6 +285,7 @@ function App() {
                             >
                               By Name
                             </Dropdown.Item>
+
                             <Dropdown.Item
                               onClick={() => setSortMethod("queue")}
                               className={
@@ -246,6 +294,7 @@ function App() {
                             >
                               Queue
                             </Dropdown.Item>
+
                             <Dropdown.Item
                               onClick={() => setSortMethod("recentlyModified")}
                               className={
@@ -256,8 +305,22 @@ function App() {
                             >
                               Recently modified
                             </Dropdown.Item>
+
+                            <Dropdown.Item
+                              onClick={() => setSortMethod("custom")}
+                              className={
+                                sortMethod === "custom" ? "selected" : ""
+                              }
+                            >
+                              Custom
+                            </Dropdown.Item>
                           </Dropdown.Menu>
                         </Dropdown>
+                        {sortMethod === "custom" && (
+                          <Button onClick={saveCustomOrder} disabled={isSaving}>
+                            {isSaving ? "Saving..." : "Save Order"}
+                          </Button>
+                        )}{" "}
                       </div>
                     </div>
                     <ClientList
@@ -276,7 +339,7 @@ function App() {
                       waitlist={activeTab === "waitlist"}
                       setClients={setClients}
                       sortMethod={sortMethod}
-                      setSortMethod={setSortMethod}
+                      onUpdateListOrder={handleUpdateListOrder} // ← pass here
                     />
                   </>
                 }

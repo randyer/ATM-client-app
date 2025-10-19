@@ -115,7 +115,26 @@ exports.handler = async (event) => {
         break;
 
       case "PUT":
-        const updateQuery = `
+        // Check if data is an array (bulk position update)
+        if (Array.isArray(data)) {
+          // Bulk update list_position for multiple clients
+          const updatePromises = data.map((client) => {
+            const bulkUpdateQuery = `
+        UPDATE client 
+        SET list_position = $1
+        WHERE id = $2 
+        RETURNING id, list_position;
+      `;
+            return clientCONNECTION.query(bulkUpdateQuery, [
+              client.list_position,
+              client.id,
+            ]);
+          });
+
+          const results = await Promise.all(updatePromises);
+          response = results.map((res) => res.rows[0]);
+        } else {
+          const updateQuery = `
             UPDATE client SET
               first_name = $1,
               last_name = $2,
@@ -146,43 +165,43 @@ exports.handler = async (event) => {
               scheduling_notes = $27
           WHERE id = $28 RETURNING *;
         `;
-        const updateValues = [
-          data.first_name,
-          data.last_name,
-          data.phone,
-          data.email,
-          data.dob,
-          data.street,
-          data.city,
-          data.state,
-          data.zip,
-          data.emergency_contact,
-          data.emergency_contact_phone,
-          data.heard_about_us,
-          data.current_symptoms,
-          data.past_symptoms,
-          data.past_injuries,
-          data.past_surgeries,
-          data.form_data,
-          data.general_notes,
-          data.objective,
-          data.assessment,
-          data.plan,
-          data.favorite,
-          data.needs_review,
-          data.status,
-          data.last_updated,
-          data.last_status_change,
-          data.scheduling_notes,
-          id,
-        ];
-        const updateRes = await clientCONNECTION.query(
-          updateQuery,
-          updateValues
-        );
-        response = updateRes.rows[0];
+          const updateValues = [
+            data.first_name,
+            data.last_name,
+            data.phone,
+            data.email,
+            data.dob,
+            data.street,
+            data.city,
+            data.state,
+            data.zip,
+            data.emergency_contact,
+            data.emergency_contact_phone,
+            data.heard_about_us,
+            data.current_symptoms,
+            data.past_symptoms,
+            data.past_injuries,
+            data.past_surgeries,
+            data.form_data,
+            data.general_notes,
+            data.objective,
+            data.assessment,
+            data.plan,
+            data.favorite,
+            data.needs_review,
+            data.status,
+            data.last_updated,
+            data.last_status_change,
+            data.scheduling_notes,
+            id,
+          ];
+          const updateRes = await clientCONNECTION.query(
+            updateQuery,
+            updateValues
+          );
+          response = updateRes.rows[0];
+        }
         break;
-
       case "DELETE":
         id = event.pathParameters.clientId;
         const deleteQuery = "DELETE FROM client WHERE id = $1 RETURNING *;";
