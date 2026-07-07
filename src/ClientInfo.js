@@ -122,6 +122,7 @@ function ClientInfo({ clients, setClients }) {
       ...prevState,
       status: newStatus,
       last_status_change: newLastStatusChange,
+      list_position: null,
     }));
   };
 

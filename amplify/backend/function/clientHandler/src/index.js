@@ -162,8 +162,9 @@ exports.handler = async (event) => {
               status = $24,
               last_updated = $25,
               last_status_change = $26,
-              scheduling_notes = $27
-          WHERE id = $28 RETURNING *;
+              scheduling_notes = $27,
+              list_position = $28
+          WHERE id = $29 RETURNING *;
         `;
           const updateValues = [
             data.first_name,
@@ -193,6 +194,7 @@ exports.handler = async (event) => {
             data.last_updated,
             data.last_status_change,
             data.scheduling_notes,
+            data.list_position ?? null,
             id,
           ];
           const updateRes = await clientCONNECTION.query(

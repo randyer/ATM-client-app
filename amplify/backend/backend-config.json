@@ -105,22 +105,6 @@
         }
       ]
     },
-    "AMPLIFY_function_clientHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "clientHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_clientHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "clientHandler"
-        }
-      ]
-    },
     "AMPLIFY_function_newPatientFormSubmission_deploymentBucketName": {
       "usedBy": [
         {
