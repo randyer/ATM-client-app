@@ -118,11 +118,17 @@ function ClientInfo({ clients, setClients }) {
   const handleStatusChange = (e) => {
     const newStatus = e.target.value;
     const newLastStatusChange = new Date().toISOString();
+    const maxPos = Math.max(
+      0,
+      ...clients
+        .filter((c) => c.status === newStatus && c.list_position != null)
+        .map((c) => c.list_position)
+    );
     setEditableClient((prevState) => ({
       ...prevState,
       status: newStatus,
       last_status_change: newLastStatusChange,
-      list_position: null,
+      list_position: maxPos + 1,
     }));
   };
 

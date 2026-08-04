@@ -41,8 +41,26 @@ const ClientList = ({
             .filter((v) => v != null && !isNaN(v))
         ) || 0;
 
+      // Append clients missing a position in arrival order (oldest status
+      // change first; clients without a timestamp go last)
+      const assignedPositions = new Map(
+        initialized
+          .filter((c) => c.list_position == null)
+          .sort((a, b) => {
+            if (!a.last_status_change && !b.last_status_change) return 0;
+            if (!a.last_status_change) return 1;
+            if (!b.last_status_change) return -1;
+            return (
+              new Date(a.last_status_change) - new Date(b.last_status_change)
+            );
+          })
+          .map((c) => [c.id, ++maxPos])
+      );
+
       initialized = initialized.map((c) =>
-        c.list_position == null ? { ...c, list_position: ++maxPos } : c
+        c.list_position == null
+          ? { ...c, list_position: assignedPositions.get(c.id) }
+          : c
       );
       setLocalClients(initialized);
       console.log("Some positions were null, fixing order");
