@@ -529,6 +529,18 @@ function ClientInfo({ clients, setClients }) {
               <Dropdown.Item
                 onClick={() =>
                   handleStatusChange({
+                    target: { name: "status", value: "cancellation" },
+                  })
+                }
+                className={
+                  editableClient.status === "cancellation" ? "selected" : ""
+                }
+              >
+                Cancellation
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() =>
+                  handleStatusChange({
                     target: { name: "status", value: "archive" },
                   })
                 }

@@ -241,6 +241,14 @@ function App() {
                         </button>
                         <button
                           className={`tab ${
+                            activeTab === "cancellation" ? "active" : ""
+                          }`}
+                          onClick={() => setActiveTab("cancellation")}
+                        >
+                          Cancellation
+                        </button>
+                        <button
+                          className={`tab ${
                             activeTab === "archive" ? "active" : ""
                           }`}
                           onClick={() => setActiveTab("archive")}

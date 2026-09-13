@@ -44,12 +44,15 @@ h1 {
 
 .tabs {
   display: flex;
-  justify-content: center;
+  justify-content: safe center;
   margin: 1rem 0;
+  overflow-x: auto;
 }
 
 .tab {
   padding: 0.5rem 1rem;
+  white-space: nowrap;
+  flex-shrink: 0;
   cursor: pointer;
   border: none;
   background: none;
