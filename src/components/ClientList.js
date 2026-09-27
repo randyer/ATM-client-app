@@ -14,7 +14,10 @@ const ClientList = ({
   const [localClients, setLocalClients] = useState([]);
 
   useEffect(() => {
-    if (!clients || clients.length === 0) return;
+    if (!clients || clients.length === 0) {
+      setLocalClients([]);
+      return;
+    }
 
     let initialized = [...clients];
 
